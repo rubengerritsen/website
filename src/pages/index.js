@@ -4,7 +4,7 @@ import Header from "../components/header"
 export default function Home() {
   return (
     <div style={{ color: `purple` }}>
-      <Header headerText="Under Construction!" />
+      <Header headerText="Under construction, website coming soon!" />
     </div>
   )
 }
