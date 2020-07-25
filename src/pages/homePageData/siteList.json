@@ -1,0 +1,12 @@
+[
+  {
+    "displayName": "Quantum Mechanics & Chemistry",
+    "pageLink": "qmc",
+    "thumbnail": "./qmc.png"
+  },
+  {
+    "displayName": "Projects",
+    "pageLink": "projects",
+    "thumbnail": "./bbbb.png"
+  }
+]

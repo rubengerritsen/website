@@ -12,13 +12,13 @@ fieldset {
 }
 
 label {
-    color: $color-primary;
+    color: $dark-primary;
     display: block;
     font-size: 0.9em;
     font-weight: $font-bold;
     margin: 0 0 ($margin * 0.5) 0;
     @include light-mode {
-      color: $color-primary-light;
+      color: $light-primary;
     }
 }
 
@@ -30,10 +30,10 @@ input[type="search"],
 input[type="url"],
 select,
 textarea {
-    background: $color-bg;
+    background: $dark-bg;
     border-radius: $radius;
     border: none;
-    border: solid 1px $color-border;
+    border: solid 1px $dark-border;
     color: inherit;
     display: block;
     outline: 0;
@@ -41,8 +41,8 @@ textarea {
     text-decoration: none;
     width: 100%;
     @include light-mode {
-      border: solid 1px $color-border-light;
-      background: $color-bg-light;
+      border: solid 1px $light-border;
+      background: $light-bg;
     }
 }
 
@@ -65,11 +65,11 @@ input[type="search"]:focus,
 input[type="url"]:focus,
 select:focus,
 textarea:focus {
-    border-color: $color-primary;
-    box-shadow: 0 0 0 1px $color-primary;
+    border-color: $dark-primary;
+    box-shadow: 0 0 0 1px $dark-primary;
     @include light-mode {
-      border-color: $color-primary-light;
-      box-shadow: 0 0 0 1px $color-primary-light;
+      border-color: $light-primary;
+      box-shadow: 0 0 0 1px $light-primary;
     }
 }
 
@@ -80,11 +80,11 @@ select {
 }
 
 select option {
-    color: $color-primary;
-    background: $color-bg;
+    color: $dark-primary;
+    background: $dark-bg;
     @include light-mode {
-      color: $color-primary-light;
-      background: $color-bg-light;
+      color: $light-primary;
+      background: $light-bg;
     }
 }
 
@@ -125,7 +125,7 @@ input[type="checkbox"] + label,
 input[type="radio"] + label {
     display: flex;
     align-items: center;
-    color: $color-body-font;
+    color: $dark-body-font;
     cursor: pointer;
     font-size: 1em;
     font-weight: $font-normal;
@@ -134,15 +134,15 @@ input[type="radio"] + label {
     position: relative;
     user-select: none;
     @include light-mode {
-      color: $color-body-font-light;
+      color: $light-body-font;
     }
 }
 
 input[type="checkbox"] + label:before,
 input[type="radio"] + label:before {
-    background: $color-bg;
+    background: $dark-bg;
     border-radius: $radius;
-    border: solid 1px $color-border;
+    border: solid 1px $dark-border;
     content: '';
     display: inline-block;
     height: calc(#{$height} * 0.6);
@@ -151,31 +151,31 @@ input[type="radio"] + label:before {
     width: calc(#{$height} * 0.6);
     margin-right: 1rem;
     @include light-mode {
-      background: $color-bg-light;
-      border: solid 1px $color-border-light;
+      background: $light-bg;
+      border: solid 1px $light-border;
     }
 }
 
 input[type="checkbox"]:checked + label:before,
 input[type="radio"]:checked + label:before {
-    background: $color-primary;
-    border-color: $color-primary;
-    color: $color-bg;
+    background: $dark-primary;
+    border-color: $dark-primary;
+    color: $dark-bg;
     content: '✓';
     @include light-mode {
-      background: $color-primary-light;
-      border-color: $color-primary-light;
-      color: $color-bg-light;
+      background: $light-primary;
+      border-color: $light-primary;
+      color: $light-bg;
     }
 }
 
 input[type="checkbox"]:focus + label:before,
 input[type="radio"]:focus + label:before {
-    border-color: $color-primary;
-    box-shadow: 0 0 0 1px $color-primary;
+    border-color: $dark-primary;
+    box-shadow: 0 0 0 1px $dark-primary;
     @include light-mode {
-      border-color: $color-primary-light;
-      box-shadow: 0 0 0 1px $color-primary-light;
+      border-color: $light-primary;
+      box-shadow: 0 0 0 1px $light-primary;
     }
 }
 

@@ -5,6 +5,7 @@ production stylesheet in assets/built/screen.scss using gulp dev
 
 */
 
+/* ---------------------------------------------------------- */
 /* Lib - Local component imports
 /* ---------------------------------------------------------- */
 @import "vars.scss";
@@ -20,22 +21,19 @@ production stylesheet in assets/built/screen.scss using gulp dev
 @import "components/animations.scss";
 @import "components/prism.scss";
 
+/* ---------------------------------------------------------- */
 /* Main - Theme styles
 /* ---------------------------------------------------------- */
 
 body {
   font-family: $font-sans-serif;
-  background: $color-bg;
+  background: $dark-bg;
   transition: background 0.1s ease-out;
   transition-delay: 0.1;
   @include light-mode {
-    background: $color-bg-light;
-    color: $color-base-light-inverted;
+    background: $light-bg;
+    color: $light-inverted;
   }
-  --card-bg: #fff;
-  --card-bdr: #eee;
-  --card-shadow: #d5d5d5;
-  --primary-color: #969592;
 }
 
 .img {
@@ -53,6 +51,19 @@ body {
   text-indent: -9999px;
 }
 
+/* Set math render size */
+.katex { font-size: 1.4em !important; }
+
+/* Handling images  */
+.md-image {
+  padding: 5px 5px 5px 5px;
+  font-size: 0.8em;
+  align-content: center;
+  text-align: center;
+  display: block;
+}
+
+/* ---------------------------------------------------------- */
 /* Layout
 /* ---------------------------------------------------------- */
 
@@ -93,7 +104,10 @@ body {
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: color($color-base l(+50%));
+  color: $dark-base;
+  @include light-mode {
+    color: $light-base;
+  }
 }
 
 .error-link {
@@ -104,10 +118,11 @@ body {
 
 .page-head-title {
   margin: 0;
+  text-align: center;
   font-size: 4.2rem;
-  color: $color-body-font;
+  color: $dark-body-font;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 @media (max-width: 500px) {
@@ -118,7 +133,10 @@ body {
 
 .page-head-description {
   margin: 0 0 1.6vw;
-  color: color($color-border l(-20%));
+  color: color($dark-border l(-20%));
+  @include light-mode{
+    color: color($light-border l(-20%));
+  }
   font-size: 2.2rem;
   line-height: 1.35em;
 }
@@ -132,17 +150,21 @@ body {
 .site-foot {
   margin: 3vw 0 1vw;
   text-align: center;
-  color: color(#{$color-border} l(-20%));
+  color: color(#{$dark-border} l(-20%));
+  @include light-mode {
+    color: color(#{$light-border} l(-20%));
+  }
   font-size: 1.4rem;
 }
 
 .site-foot a {
-  color: $color-body-font;
+  color: $dark-body-font;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 
+/* ---------------------------------------------------------- */
 /* Site Navigation
 /* ---------------------------------------------------------- */
 
@@ -159,15 +181,6 @@ body {
   align-items: center;
 }
 
-.site-head-left {
-  position: relative;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-  white-space: nowrap;
-}
-
 .nav {
   display: flex;
   margin: 0 0 0 -12px;
@@ -181,16 +194,15 @@ body {
   padding: 0;
 }
 
-.site-head-left a,
 .site-head-right a {
   display: block;
   margin: 0;
   padding: 10px 12px;
-  color: $color-body-font;
+  color: $dark-body-font;
   font-weight: 600;
   opacity: 0.6;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 
@@ -198,41 +210,6 @@ body {
 .site-head a:hover {
   text-decoration: none;
   opacity: 1;
-}
-
-.site-head-center {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.site-head-logo {
-  flex-shrink: 0;
-  display: block;
-  padding: 10px;
-  color: $color-body-font;
-  font-size: 2.1rem;
-  line-height: 1em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  @include light-mode {
-    color: $color-body-font-light;
-  }
-}
-
-.site-head-logo:hover {
-  text-decoration: none;
-}
-
-.site-head-logo img {
-  display: block;
-  margin-top: 2px;
-  width: auto;
-  height: 28px;
 }
 
 .site-head-right {
@@ -243,42 +220,7 @@ body {
   align-items: center;
 }
 
-.social-links {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.subscribe-button {
-  display: block;
-  padding: 4px 10px;
-  border: $color-base 1px solid;
-  color: $color-base;
-  font-size: 1.2rem;
-  line-height: 1em;
-  border-radius: 10px;
-  opacity: 0.8;
-}
-
-.subscribe-button:hover {
-  text-decoration: none;
-  opacity: 1;
-}
-
-.rss-button {
-  opacity: 0.4;
-}
-
-.rss-button:hover {
-  opacity: 1;
-}
-
-.rss-button svg {
-  margin-bottom: 1px;
-  height: 2.1rem;
-  fill: $color-base;
-}
-
+/* ---------------------------------------------------------- */
 /* Mobile Nav Menu
 /* ---------------------------------------------------------- */
 
@@ -359,13 +301,13 @@ body {
   }
 
   .site-head-open {
-    background: $color-bg;
+    background: $dark-bg;
     transition: background 0.5s ease-out;
     transition-delay: 0.25;
     overflow: hidden;
     height: 100vh;
     @include light-mode {
-      background: $color-bg-light;
+      background: $light-bg;
     }
   }
 
@@ -389,9 +331,9 @@ body {
     transform: scale(1) translateY(0px);
   }
   .site-head-open .nav-current a {
-    border-bottom: $color-base 2px solid;
+    border-bottom: $dark-base 2px solid;
     @include light-mode {
-      border-bottom: $color-base-light 2px solid;
+      border-bottom: $light-base 2px solid;
     }
   }
   .site-head-open .site-head-right a {
@@ -402,9 +344,9 @@ body {
   }
 }
 
-/* Post Feed
 /* ---------------------------------------------------------- */
-
+/* Post Cards (site and post links based around an image)
+/* ---------------------------------------------------------- */
 .post-feed {
   display: flex;
   align-items: center;
@@ -449,20 +391,27 @@ body {
 
 /* Portrait and Landscape */
 @media only screen 
-and (min-width: 768px) {
-.grids-blog {
-  grid-template-columns: 1fr 1fr;
-}
+and (min-width: 700px) {
+  .grids-blog {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media only screen 
-  and (min-width: 1024px) {
+and (min-width: 1050px) {
   .grids-blog {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  .two-grids-blog {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 64px;
+}
+@media only screen 
+and (min-width: 1500px) {
+  .grids-blog {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media only screen
+and (min-width: 2000px){
+  .grids-blog {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -490,47 +439,6 @@ and (min-width: 768px) {
     text-align: center;
   }
   
-}
-
-.card-blog {
-  display: grid;
-  background-color: var(--card-bg);
-  border-radius: 9px;
-  border: 1px solid var(--card-bdr);
-  box-shadow: 0 0 30px var(--card-shadow);
-  overflow: hidden;
-  line-height: 1.5;
-  &:hover .post-link-blog {
-    color: var(--primary-color);
-  }
-  > a img {
-    display: block;
-  }
-  > header {
-    padding: 24px;
-  }
-  > h2:first-child {
-    margin: 0 0 0.5rem 0;
-  }
-  .post-title-blog {
-    font-size: 2rem;
-    margin-bottom: 0rem;
-  }
-  .post-meta-blog {
-    font-weight: 100;
-    margin-bottom: 0;
-  }
-  .post-link-blog {
-    color: var(--text-color);
-    text-decoration: none;
-  }
-}
-
-.post-blog-image{
-  min-height: 250px;
-  max-height: 250px;
-  max-width: 400px;
-
 }
 
 .post-thumbnail-blog {
@@ -587,7 +495,10 @@ and (min-width: 768px) {
   right: 0;
   bottom: 0;
   left: 0;
-  color: $color-body-font;
+  color: $dark-body-font;
+  @include light-mode{
+    color: $light-body-font;
+  }
   background: rgba(0, 0, 0, 0.1);
   opacity: 1;
   transition: opacity 0.5s cubic-bezier(0.33, 0, 0.2, 1);
@@ -597,7 +508,7 @@ and (min-width: 768px) {
 .post-card-body,
 .post-card-tag-link {
   font-size: 1.2rem;
-  color: $color-sub-base;
+  color: $dark-sub-base;
 }
 
 .post-card-readmore {
@@ -629,6 +540,7 @@ and (min-width: 768px) {
 }
 
 .post-card-title {
+  color: #ffffff;
   margin: 0;
   display: inline-block;
   font-size: 3.4rem;
@@ -646,7 +558,10 @@ and (min-width: 768px) {
   right: 5vw;
   font-size: 22vw;
   line-height: 1em;
-  font-weight: $color-body-font;
+  font-weight: $dark-body-font;
+  @include light-mode {
+    font-weight: $light-body-font;
+  }
   letter-spacing: -0.1em;
   font-family: $font-serif;
   color: rgba(0, 0, 0, 0.2);
@@ -663,7 +578,10 @@ and (min-width: 768px) {
   font-size: 5rem;
   line-height: 1.15em;
   text-align: left;
-  color: $color-body-font;
+  color: $dark-body-font;
+  @include light-mode {
+    color: $light-body-font;
+  }
 }
 
 .post-card.no-image:hover .post-card-title {
@@ -706,6 +624,60 @@ and (min-width: 768px) {
   }
 }
 
+/* ---------------------------------------------------------- */
+/* Post Link Cards
+/* ---------------------------------------------------------- */
+.post-link {
+  display: grid;
+  background-color: $dark-pl-bg;
+  border-radius: 9px;
+  border: 1px solid $dark-pl-bdr;
+  box-shadow: 0 0 30px $dark-pl-shadow;
+  overflow: hidden;
+  line-height: 1.5;
+  @include light-mode {
+    background-color: $light-pl-bg;
+    border: 1px solid $light-pl-bdr;
+    box-shadow: 0 0 30px $light-pl-shadow;
+  }
+  &:hover .post-link-blog {
+    color: $dark-pl-hover;
+    @include light-mode {
+      color: $light-pl-hover;
+    }
+  }
+  > a img {
+    display: block;
+  }
+  > header {
+    padding: 24px;
+  }
+  > h2:first-child {
+    margin: 0 0 0.5rem 0;
+  }
+  .post-link-title {
+    margin: 0.4em 0 0 0;
+    font-size: 2rem;
+  }
+  .post-link-meta {
+    font-weight: 100;
+    margin-bottom: 0;
+  }
+  .post-link-blog {
+    color: $dark-body-font;
+    @include light-mode {
+      color: $light-body-font;
+    }
+    text-decoration: none;
+  }
+}
+
+.post-link-image{
+  min-height: 150px;
+  max-height: 200px;
+}
+
+/* ---------------------------------------------------------- */
 /* Post Content
 /* ---------------------------------------------------------- */
 
@@ -735,10 +707,10 @@ and (min-width: 768px) {
 
 .post-content-title {
   margin: 0 0 3vw;
-  color: $color-body-font;
+  color: $dark-body-font;
   text-align: center;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 
@@ -746,11 +718,11 @@ and (min-width: 768px) {
   margin: -2vw 0 3vw;
   font-size: 2.2rem;
   line-height: 1.6em;
-  color: $color-body-font;
+  color: $dark-body-font;
   text-align: center;
   opacity: 0.7;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 @media (max-width: 500px) {
@@ -785,9 +757,9 @@ and (min-width: 768px) {
 .post-content-body h4,
 .post-content-body h5,
 .post-content-body h6 {
-  color: $color-body-font;
+  color: $dark-body-font;
   @include light-mode {
-    color: $color-body-font-light;
+    color: $light-body-font;
   }
 }
 
@@ -807,7 +779,10 @@ and (min-width: 768px) {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
   /* border-left: #3eb0ef 3px solid; */
-  border-left: $color-primary 3px solid;
+  border-left: $dark-primary 3px solid;
+  @include light-mode {
+    border-left: $light-primary 3px solid;
+  }
 }
 
 .post-content-body blockquote p {
@@ -822,13 +797,18 @@ and (min-width: 768px) {
   margin-bottom: 0;
 }
 
+// code box just around text
 .post-content-body code {
   padding: 0;
   font-size: 0.8em;
   line-height: 1em;
   font-weight: 400 !important;
-  /* background: $color-bg; */
-  background: var($color-bg-dark) !important;
+  color: $dark-body-font;
+  background: $dark-bg-bright !important;
+  @include light-mode{
+    background: $dark-bg !important;
+    color: $dark-body-font;
+  }
   border-radius: 3px !important;
 }
 
@@ -836,20 +816,23 @@ and (min-width: 768px) {
   word-break: break-all;
 }
 
+// code blocks around complete code
 .post-content-body pre {
   overflow-x: auto;
   margin: .5em 0 1.5em;
   padding: 20px;
   max-width: 100%;
-  border: $color-bg-bright 1px solid !important;
-  color: $color-body-font;
+  border: $dark-bg-bright 1px solid !important;
+  color: $dark-body-font;
   font-size: 1.4rem;
   line-height: 1.5em;
-  background: $color-bg-dark !important;
+  background: $dark-bg-bright !important;
   border-radius: 5px;
-  // @include light-mode {
-  //   color: $color-body-font-light;
-  // }
+  @include light-mode {
+     color: $light-body-font;
+     background: $dark-bg !important;
+
+  }
 }
 
 .post-content-body pre code {
@@ -857,6 +840,7 @@ and (min-width: 768px) {
   font-size: inherit;
   line-height: inherit;
   background: transparent;
+  
 }
 
 .post-content-body pre code :not(span) {
@@ -869,24 +853,6 @@ and (min-width: 768px) {
 
 .post-content-body hr {
   margin: 1.5em 0;
-}
-
-.post-content-body hr:after {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  display: block;
-  margin-left: -10px;
-  width: 1px;
-  height: 30px;
-  background: $color-body-font;
-  box-shadow: $color-body-font 0 0 5px;
-  transform: rotate(45deg);
-  @include light-mode {
-    background: $color-body-font-light;
-    box-shadow: $color-body-font-light 0 0 5px;
-  }
 }
 
 .footnotes-sep {
@@ -902,48 +868,17 @@ and (min-width: 768px) {
 }
 
 .footnote-backref {
-  color: $color-primary !important;
+  color: $dark-primary !important;
   font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none !important;
   box-shadow: none !important;
+  @include light-mode {
+    color: $light-primary !important;
+  }
 }
 
-/* Author Archive
 /* ---------------------------------------------------------- */
-
-.author-meta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  color: color($color-border l(-20%));
-}
-
-.author-links {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.author-links a {
-  display: block;
-  margin: 0;
-  padding: 0 12px;
-  color: $color-base;
-  opacity: 0.4;
-}
-
-.author-links a:hover {
-  text-decoration: none;
-  opacity: 1;
-}
-
-.author-links .divider {
-  display: inline-block;
-  margin: 0 3px;
-}
-
 /* Page Template
 /* ---------------------------------------------------------- */
 
@@ -953,6 +888,7 @@ and (min-width: 768px) {
   text-align: center;
 }
 
+/* ---------------------------------------------------------- */
 /* Tag Pages
 /* ---------------------------------------------------------- */
 
@@ -968,25 +904,25 @@ and (min-width: 768px) {
   flex: 1 1 auto;
   margin: 0.7vw;
   padding: 0.5vw;
-  background-color: $color-bg-bright;
-  color: $color-sub-base;
+  background-color: $dark-bg-bright;
+  color: $dark-sub-base;
   font-size: 2rem;
   border-radius: 9px;
   line-height: 1em;
   white-space: nowrap;
   @include light-mode {
-    background-color: $color-bg-bright-light;
-    color: $color-sub-base-light;
+    background-color: $light-bg-bright;
+    color: $light-sub-base;
   }
 }
 
 .tag-item:hover {
-  color: $color-bg-bright;
-  background-color: $color-sub-base;
+  color: $dark-bg-bright;
+  background-color: $dark-sub-base;
   transition: all 0.4s ease-out;
   @include light-mode {
-    color: $color-bg-bright-light;
-    background-color: $color-sub-base-light;
+    color: $light-bg-bright;
+    background-color: $light-sub-base;
   }
 }
 

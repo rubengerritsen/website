@@ -54,11 +54,11 @@ module.exports = {
         develop: true, // Enable while using `gatsby develop`
         // tailwind: true, // Enable tailwindcss support
         // whitelist: ['whitelist'], // Don't remove this selector
-        ignore: ['/ignored.css', 'prismjs/', '/prism.css', 'docsearch.js/'], // Ignore files/folders
+        //ignore: ['/ignored.css', 'prismjs/', '/prism.css', 'docsearch.js/'], // Ignore files/folders
         purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       },
     },
-    `gatsby-plugin-offline`,
+    //`gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-sass',
     {
@@ -72,18 +72,28 @@ module.exports = {
               withWebp: true,
               showCaptions: true,
               quality: 75,
-              wrapperStyle: `margin: 7vw 0;`,
             },
           },
+          `gatsby-remark-bibliography`,
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           }, 
-          `gatsby-remark-copy-linked-files`,
+          //`gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
+          `gatsby-remark-autolink-headers`,
           `gatsby-remark-katex`,
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: "Table of Contents",
+              tight: true,
+              fromHeading: 1,
+              toHeading: 3
+            },
+          },
           `gatsby-remark-prismjs`,
         ],
       },

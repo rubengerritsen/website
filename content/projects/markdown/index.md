@@ -1,15 +1,151 @@
 ---
 title: Markdown Reference
 date: "2020-07-23"
-tags: [gatsby, markdown, math]
+tags: [markdown, math, floats]
 thumbnail: ./mdImage.png
 description: A markdown reference cheat.
 ---
 
 
-# This is based on [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+# A Markdown Reference
 
-This markdown file is often used as a quick reference, test and showcase and that is exactly why it is here. Hence you will see the standard use of markdown, but I have also added a part on math support. In the future I hope to add automated tables of contents.
+This markdown file is an extended version of the standard [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) often used as a reference, test and showcase. Hence presented here are mostly things markdown can do natively plus some extras, namely
+
+* mathmode (based on KaTeX),
+* automatic tables of contents,
+* floating figures and
+* bibliographies.
+
+## Automatic Table Of Contents in Markdown
+To create this toc install the `gatsby-remark-table-of-contents` plugin, note that this plugin does not work if the `prismjs` plugin is defined befor the toc plugin in the `gatsby-config.js` file. The plugin needs the `gatsby-remark-autolink-headers` plugin to make the links in the toc work. After setting up the two plugins one can simply add
+
+~~~no-highlight
+```toc
+```
+~~~
+
+to the markdown file and it will automatically be replaced by the table of contents. Here we go:
+
+
+```toc
+```
+
+## Math Mode
+
+```no-highlight
+Math support can be added to markdown via the `gatsby-remark-katex` plugin. 
+Simply add `require(`katex/dist/katex.min.css`)` to your blog template after install and configuration of the plugin.
+One can then simply type "Latex style" equations, i.e. `$x$` for inline and `$$` for display math environments.
+
+examples:
+
+inline: $a^2 + b^2 = c^2$ 
+
+display math:
+
+$$
+\braket{\phi\vert\phi} = \int_0^\infty \psi(x,t) dx  \tag{1}
+$$
+
+
+```
+
+Math support can be added to markdown via the `gatsby-remark-katex` plugin. 
+Simply add `require("katex/dist/katex.min.css")` to your blog template after install and configuration of the plugin.
+One can then simply type Latex "type" equations, i.e. `$x$` for inline and `$$` for display math environments.
+
+examples:
+
+We will just type some text to show what will happen if we use the inline version of KaTeX. Note that I added the following option `.katex { font-size: 1.4em !important; }` to the right css file to render equations and formulas larger than surrounding text, so lets give it a go, inline: $a^2 + b^2 = c^2$. Well I hope that looks pretty!
+
+Now the display math environment (since version 0.12.0 of KaTeX we also have bra-ket support):
+
+$$
+\braket{\psi_1\vert\psi_2} = \int_{-\infty}^\infty \psi_1^*\psi_2 dx \tag{1}
+$$
+
+That is all there is to it.
+
+#### Equation Numbers
+At the moment KaTeX only supports manually labelling equations with the `\tag` command.
+
+## Images Normal and Floating
+Markdown is very bad at handling figures so we use our own `html` environment, which makes everything rather easy.
+
+```
+This is just an image
+
+<div class="md-image" style="float:center;max-width:500px;min-width:300px">
+    <img src="water.jpg"/>
+    An image.
+    <hr-fig/>
+</div>
+
+#### Floating Figures
+<div class="md-image" style="float:right;max-width:500px;min-width:300px">
+    <img src="water.jpg"/>
+    Now this figure is a float.
+    <hr-fig/>
+</div>
+```
+`hr-fig`  and `md-image` are defined in a css file:
+
+```
+hr-fig {
+    position: relative;
+    display: block;
+    align-content: center;
+    text-align:center;
+    width: 60%;
+    margin: auto;
+    margin-top: -0.2em;
+    padding: 0;
+    height: 0.01rem;
+    border: 0;
+    border-top: 0.01rem solid $dark-border;
+    @include light-mode {
+      border-top: solid 0.01rem $light-border;
+    }
+}
+
+.md-image {
+  padding: 5px 5px 5px 5px;
+  font-size: 0.8em;
+  align-content: center;
+  text-align: center;
+  display: block;
+}
+```
+Now let's see what happens:
+
+This is just an image
+
+<div class="md-image" style="float:center;max-width:500px;min-width:300px">
+    <img src="water.jpg"/>
+    An image.
+    <hr-fig/>
+</div>
+
+#### Floating Figures
+<div class="md-image" style="float:right;max-width:500px;min-width:300px">
+    <img src="water.jpg"/>
+    Now this figure is a float.
+    <hr-fig/>
+</div>
+Now we also present a floating version. I find it very ugly if my floating figures overlap (vertically) with one of the larger headings. To prevent overlap with headings 1 and 2 I added `clear:both;` to there css classes. An example:
+
+```
+h1 {
+    margin: 0 0 0.3em 0;
+    font-size: 3.5rem;
+    font-weight: 700;
+    clear:both;
+}
+```
+
+Mauris tristique nec velit sed egestas. Nam vel libero orci. Morbi placerat turpis eu sem viverra mollis. Nulla ultrices tortor sed dolor molestie, tristique eleifend nisi tincidunt. Morbi gravida et ipsum non blandit. Pellentesque eu felis condimentum, pharetra nisi id, gravida odio. Cras eleifend sed nulla sed aliquam. Nulla aliquet sit amet dui id sollicitudin. 
+
+
 
 ## Headers 
 
@@ -359,39 +495,34 @@ Line break.
 gpg --edit-key your@email.com
 ```
 
----
 
-## MathMode
+## Bibliography
+There is a great plugin for bibliographies in gatsby, [gatsby-remark-bibliography](https://github.com/ptigas/gatsby-remark-bibliography). Install it and add it to the site configuration and you can use it like this `\cite{gregor2015draw}` \cite{gregor2015draw}.
 
-```no-highlight
-Math support can be added to markdown via the `gatsby-remark-katex` plugin. 
-Simply add `require(`katex/dist/katex.min.css`)` to your blog template after install and configuration of the plugin.
-One can then simply type "Latex style" equations, i.e. `$x$` for inline and `$$` for display math environments.
+To add the bibliography itself just make a html tag for it.
 
-examples:
-
-inline: $a^2 + b^2 = c^2$ 
-
-display math:
-
-$$
-\int_0^\infty \psi(x,t) dx
-$$
+```html
+<bibliography>
+@article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf},
+}
+</bibliography>
 ```
 
-Math support can be added to markdown via the `gatsby-remark-katex` plugin. 
-Simply add `require("katex/dist/katex.min.css")` to your blog template after install and configuration of the plugin.
-One can then simply type Latex "type" equations, i.e. `$x$` for inline and `$$` for display math environments.
+---
 
-examples:
+<bibliography>
+@article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf},
+}
+</bibliography>
 
-inline: $a^2 + b^2 = c^2$ 
-
-display math:
-
-$$
-\int_0^\infty \psi(x,t) dx
-$$
-
-[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-[^2]: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+---

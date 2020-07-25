@@ -7,6 +7,10 @@ import SEO from "../components/seo"
 
 require(`katex/dist/katex.min.css`)
 
+import "../style/normalize.css"
+import "../style/all.scss"
+
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark

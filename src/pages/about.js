@@ -37,6 +37,11 @@ const AboutPage = ({ data }, location) => {
           <p>
             This site is meant as a place to document the different projects I do and share findings either related to my research at the TU/e or any of my other projects.
           </p>
+        
+        <h3 id ="dynamic-styles">Contact</h3>
+        <p>
+          If you want to contact me, send me an email via r.h.j.gerritsen(at)tue.nl.
+        </p>
         </div>
       </article>
     </Layout>

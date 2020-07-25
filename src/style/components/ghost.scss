@@ -5,6 +5,10 @@
     margin: 7vw 0;
 }
 
+.kg-md-image{
+    max-width: 30vw;
+}
+
 .kg-embed-card {
     display: flex;
     flex-direction: column;
@@ -22,11 +26,11 @@
     font-size: 1.3rem;
     line-height: 1.4em;
     font-weight: 600;
-    color: $color-body-font;
+    color: $dark-body-font;
     text-align: center;
     opacity: 0.8;
     @include light-mode {
-      color: $color-body-font-light;
+      color: $light-body-font;
     }
 }
 

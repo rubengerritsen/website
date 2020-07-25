@@ -9,13 +9,13 @@ table {
 }
 
 th {
-    color: $color-body-font;
+    color: $dark-body-font;
     font-size: 0.9em;
     font-weight: $font-bold;
     padding: 0 0.7em 0.4em 0.7em;
     text-align: left;
     @include light-mode {
-      color: $color-body-font-light;
+      color: $light-body-font;
     }
 }
 
@@ -30,11 +30,11 @@ td:first-child {
 }
 
 tbody tr {
-    border: solid 1px $color-border;
+    border: solid 1px $dark-border;
     border-left: 0;
     border-right: 0;
     @include light-mode {
-      border: solid 1px $color-border-light;
+      border: solid 1px $light-border;
     }
 }
 
@@ -42,16 +42,12 @@ tbody tr:first-child td {
     border-top-width: 1px;
 }
 
-tbody tr:nth-child(2n + 1) {
-    // background-color: $color-bg;
-}
-
 tbody td {
-    border: solid 1px $color-border;
+    border: solid 1px $dark-border;
     border-left-width: 0;
     border-top-width: 0;
     @include light-mode {
-      border: solid 1px $color-border-light;
+      border: solid 1px $light-border;
     }
 }
 

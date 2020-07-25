@@ -24,11 +24,12 @@ const ProjectsPage = ({ data }) =>{
         title="Projects"
       />
       <article className="post-content-blog page-template no-image">
-        <div className="">
+        <div className="page-head-title">
       <h2>Projects</h2>
+      </div>
       <div className="grids-blog">
         {Posts}
-      </div>
+      
       </div>
       </article>
     </Layout>

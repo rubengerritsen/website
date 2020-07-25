@@ -11,10 +11,13 @@ import PostCardSite from "../components/postCardSite"
 import "../style/normalize.css"
 import "../style/all.scss"
 
+// Needed for syntax highlighting
+import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
+deckDeckGoHighlightElement();
+
 
 const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
   const sites = data.allSiteListJson.edges
   let postCounter = 0
 
@@ -58,28 +61,6 @@ const indexQuery = graphql`
       siteMetadata {
         title
         description
-      }
-    }
-    allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(blog)/"  }}, sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM D, YYYY")
-            title
-            description
-            thumbnail {
-              childImageSharp {
-                fluid(maxWidth: 1360) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
       }
     }
   allSiteListJson{
