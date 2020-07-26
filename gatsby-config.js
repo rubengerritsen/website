@@ -1,5 +1,6 @@
 const siteParams = require("./siteParams")
 const urljoin = require("url-join")
+const sideParams = require("./config")
 
 module.exports = {
   siteMetadata: {
@@ -8,7 +9,7 @@ module.exports = {
     author: siteParams.author,
     siteUrl: urljoin(siteParams.url, siteParams.prefix),
     sidebarConfig: {
-      forcedNavOrder: ['/'],
+      forcedNavOrder: sideParams.sidebar.forcedNavOrder,
       ignoreIndex: false
     }
   },

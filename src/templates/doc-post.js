@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import { graphql } from "gatsby"
 
 import LayoutDocs from "../components/docs_layout"
+import NextPrevious from '../components/NextPrevious';
 import SEO from "../components/seo"
 //import NextPrevious from '../components/NextPrevious';
 import config from '../../config';
@@ -66,7 +67,7 @@ export default class MDRuntime extends Component {
         if (slug) {
           const { node } = allMarkdownRemark.edges.find(({ node }) => node.fields.slug === slug);
 
-          return { title: node.fields.title, url: node.fields.slug };
+          return { title: node.frontmatter.title, url: node.fields.slug };
         }
       });
       const post = this.props.data.markdownRemark
@@ -95,7 +96,9 @@ export default class MDRuntime extends Component {
           />
 
           <footer className="post-content-footer">
-            PUT PREVIOUS NEXT HERE!
+          <div className={'addPaddTopBottom'}>
+          <NextPrevious markdownRemark={this.props.data.markdownRemark} nav={nav} />
+        </div>
           </footer>
         </article>
         </LayoutDocs>
@@ -117,6 +120,9 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       tableOfContents(maxDepth: 2)
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

@@ -4,7 +4,7 @@ export const GlobalStateContext = React.createContext();
 export const GlobalDispatchContext = React.createContext();
 
 const initialState = {
-  collapsed: {}
+  collapsed: true
 };
 
 function reducer(state, action) {

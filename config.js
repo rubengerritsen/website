@@ -9,9 +9,9 @@ const config = {
   },
   sidebar: {
     forcedNavOrder: [
-      '/docs/introduction', // add trailing slash if enabled above
-      '/docs/codeblock',
-      '/docs/markd',
+      '/docs/introduction/', // add trailing slash if enabled above
+      '/docs/markd/',
+      '/docs/codeblock/',
     ],
     links: [{ text: 'Google', link: 'https://google.com' }],
     frontline: false,

@@ -65,8 +65,11 @@ const calculateTreeData = (edges, sidebarConfig) => {
   const forcedNavOrder = sidebarConfig.forcedNavOrder || [];
   const tmp = [...forcedNavOrder];
   tmp.reverse();
+  console.log("temp")
+  console.log(tmp)
   return tmp.reduce((accu, slug) => {
-    const parts = slug.split('/');
+    const parts = slug.slice(1,-1).split('/');
+    console.log(parts)
     let { items: prevItems } = accu;
     for (const part of parts.slice(1, -1)) {
       let tmp = prevItems.find(({ label }) => label === part);
