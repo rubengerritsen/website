@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-const Layout = props => {
+const LayoutHome = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = React.useState(false)
   return (
@@ -54,4 +54,4 @@ const Layout = props => {
   )
 }
 
-export default Layout
+export default LayoutHome

@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 
-import Layout from "../components/layout"
+import LayoutDocs from "../components/docs_layout"
 import SEO from "../components/seo"
-import PostCard from "../components/postCard"
 
 import "../style/normalize.css"
 import "../style/all.scss"
@@ -12,7 +11,7 @@ const AboutPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutDocs title={siteTitle}>
       <SEO title="About" />
       <article className="post-content page-template no-image">
         <div className="post-content-body">
@@ -24,7 +23,7 @@ const AboutPage = ({ data }, location) => {
           </p>
         </div>
       </article>
-    </Layout>
+    </LayoutDocs>
   )
 }
 

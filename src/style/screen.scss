@@ -63,17 +63,81 @@ body {
   display: block;
 }
 
+
+/* ---------------------------------------------------------- */
+/* Docs-Layout
+/* ---------------------------------------------------------- */
+.sidebarTitle {
+  position: sticky;
+    top: 0;
+  background-color: $dark-sb-bg-title;
+  color: $dark-body-font;
+  @include light-mode{
+    background-color: $light-sb-bg-title;
+    color: $light-body-font;
+  }
+  padding: 18px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.sideBarShow {
+  display: none;
+}
+
+.sidebarTitle a {
+  color: $dark-sb-title;
+  @include light-mode{
+    color: $light-sb-title;
+  }
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: yellow;
+  padding: 50px;
+  font-size: 20px;
+}
+
+.greenCircle {
+  width: 8px;
+  height: 8px;
+  background-color: #1cd3c6;
+  border-radius: 50%;
+  margin: 0 12px;
+}
+
+.headerNav {
+  font-family: 'Roboto';
+  padding: 0px 24px;
+  color: #001933;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1em;
+}
+
+
+@media (max-width: 850px){
+  .hiddenMobile {
+    display: none !important;
+  }
+}
+
 /* ---------------------------------------------------------- */
 /* Layout
 /* ---------------------------------------------------------- */
 
 .site-wrapper {
-  padding: 1vw;
   min-height: 100vh;
+  padding: 0vw;
 }
 @media (max-width: 850px) {
   .site-wrapper {
-    padding: 6vw;
+    padding: 0vw;
   }
 }
 
@@ -171,11 +235,22 @@ body {
 .site-head {
   position: relative;
   z-index: 300;
-  margin-top: -10px;
   font-size: 1.35rem;
+  box-shadow: #000;
+  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+}
+
+.site-head-docs {
+  background-color: $dark-bg;
+  box-shadow: #000;
+  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  @include light-mode {
+    background-color: $light-bg;
+  } 
 }
 
 .site-head-container {
+  padding: 1rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -234,7 +309,7 @@ body {
 
 @media (max-width: 850px) {
   .site-head {
-    padding: 0;
+    padding: 12px;
   }
   .nav-burger {
     display: block;
@@ -246,7 +321,7 @@ body {
     background: rgba(255, 255, 255, 0);
     z-index: -1;
     transition: all 0.4s ease-out;
-    overflow: hidden;
+    overflow: visible;
   }
   .site-head-left,
   .site-head-right {
@@ -266,7 +341,7 @@ body {
     opacity: 0;
   }
   .site-head-right a {
-    padding: 5px 0;
+    padding: 5px 0vw;
     margin: 1px 0;
     font-size: 2rem;
   }
@@ -304,7 +379,7 @@ body {
     background: $dark-bg;
     transition: background 0.5s ease-out;
     transition-delay: 0.25;
-    overflow: hidden;
+    overflow: visible;
     height: 100vh;
     @include light-mode {
       background: $light-bg;
@@ -366,7 +441,7 @@ body {
   height: 25vw;
   background: linear-gradient(135deg, #242426 0%, #161618 100%) center center;
   background-size: cover;
-  overflow: hidden;
+  overflow: visible;
   counter-increment: posts;
 }
 
@@ -439,6 +514,47 @@ and (min-width: 2000px){
     text-align: center;
   }
   
+}
+
+.doc-title {
+  text-align: left;
+
+  color: var(--featured-text);
+  display: grid;
+  align-content: center;
+  position: relative;
+  padding: 18px 0px 18px 0px;
+  overflow: visible;
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+  .post-meta {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.8);
+  }
+  .post-title {
+    font-size: 5rem;
+    color: $dark-body-font;
+    @include light-mode {
+      color: $light-body-font;
+    }
+  }
+}
+
+.post-title-docs {
+  font-size: 6rem;
+  line-height: 1.2;
+  font-weight: 600;
+  border-left: 4px solid $dark-title-accent;
+  padding: 16px 16px 0px 16px;
+  flex: 1;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 20px;
+  @include light-mode{
+    border-left: 4px solid $light-title-accent;
+  }
 }
 
 .post-thumbnail-blog {
@@ -633,7 +749,7 @@ and (min-width: 2000px){
   border-radius: 9px;
   border: 1px solid $dark-pl-bdr;
   box-shadow: 0 0 30px $dark-pl-shadow;
-  overflow: hidden;
+  overflow: visible;
   line-height: 1.5;
   @include light-mode {
     background-color: $light-pl-bg;
@@ -682,6 +798,12 @@ and (min-width: 2000px){
 /* ---------------------------------------------------------- */
 
 .post-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2vw 3vw;
+}
+
+.doc-content {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2vw 3vw;
@@ -803,12 +925,8 @@ and (min-width: 2000px){
   font-size: 0.8em;
   line-height: 1em;
   font-weight: 400 !important;
-  color: $dark-body-font;
-  background: $dark-bg-bright !important;
-  @include light-mode{
-    background: $dark-bg !important;
-    color: $dark-body-font;
-  }
+  color: $code-font;
+  background: $code-bg !important;
   border-radius: 3px !important;
 }
 
@@ -823,16 +941,11 @@ and (min-width: 2000px){
   padding: 20px;
   max-width: 100%;
   border: $dark-bg-bright 1px solid !important;
-  color: $dark-body-font;
+  color: $code-font;
   font-size: 1.4rem;
   line-height: 1.5em;
-  background: $dark-bg-bright !important;
+  background: $code-bg !important;
   border-radius: 5px;
-  @include light-mode {
-     color: $light-body-font;
-     background: $dark-bg !important;
-
-  }
 }
 
 .post-content-body pre code {
@@ -943,4 +1056,190 @@ and (min-width: 2000px){
   max-width: 70%;
   margin: auto;
   text-align: left;
+}
+
+
+/* ****************************************
+ * SIDE BAR EXTRAS
+ **********************************************/
+
+ .sidebar{
+  width: 100%;
+
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: sticky;
+  top: 0;
+
+  overflow-y:scroll;
+
+  border-right: 1px solid #000;
+  top: 0;
+  padding-right: 0;
+  overflow: visible;
+
+  @media only screen and (max-width: 1023px) {
+    width: 100%;
+    /* position: relative; */
+    height: 100vh;
+  }
+
+  @media (min-width: 767px) and (max-width: 1023px) {
+    padding-left: 0;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-left: 0px;
+    height: auto;
+  }
+ }
+
+ .navsidebar{
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  border-right: $dark-base 100px solid;
+  overflow-x: visible;
+  overflow-y: visible;
+  width: 260px;
+  height: 100%;
+  padding: 1rem 0;
+  background: $light-bg;
+}
+
+.sidebarButton{
+  float: right;
+  position: relative;
+  right: 0 !important;
+  padding: 0 0rem;
+  height: 20px;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: $dark-body-font;
+  font-size: 1rem;
+}
+
+
+
+@media (max-width: 767px) {
+.hiddenMobile {
+  display: none !important;
+}
+}
+
+
+.sideBarUL {
+  margin-top: 5px;
+}
+
+.sideBarAside {
+  width: 100%;
+  height: 100vh;
+  padding-left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: sticky;
+  top: 0;
+  padding-right: 0;
+  box-shadow: #000;
+  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+
+  @media only screen and (max-width: 1023px) {
+    width: 100%;
+    /* position: relative; */
+    height: 100vh;
+  }
+
+  @media (min-width: 767px) and (max-width: 1023px) {
+    padding-left: 0;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-left: 0px;
+    height: auto;
+  }
+}
+
+
+
+.sideBarUL li {
+  margin: 0.2em;
+}
+
+.sideBarUL li a {
+  /* color: #fff; */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 7px 24px 7px 16px;
+  padding-left: 10px;
+  padding-right: 25px;
+  border-style: solid none solid solid;
+  border-width: 1px 0px 1px 1px;
+  border-color: transparent currentcolor transparent transparent;
+}
+
+.sideBarUL .item {
+  list-style: none;
+  padding: 0;
+}
+
+
+.showFrontLine .item > a:hover {
+  background-color: #001933;
+}
+
+.showFrontLine .active > a {
+  /* color: #fff; */
+  background-color: #001933;
+}
+
+.sideBarUL .item .item {
+  margin-left: 16px;
+}
+
+.mainDocs {
+  display: flex;
+  flex-grow: 1;
+  margin: 0px 88px;
+  padding-top: 3rem;
+  background: $dark-bg;
+
+  table tr {
+    background: $dark-bg;
+  }
+
+  @include light-mode{
+    background: $light-bg;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    padding-left: 0;
+    margin: 0 10px;
+    padding-top: 3rem;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
+  background: $dark-bg;
+
+    @media only screen and (max-width: 767px) {
+    display: block;
+  }
+
+  @include light-mode {
+    background: red;
+
+    .sideBarUL li a {
+      color: $light-body-font;
+    }
+  }
 }

@@ -1,12 +1,11 @@
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 
-import Layout from "../components/layout"
+import LayoutHome from "../components/home_layout"
 import SEO from "../components/seo"
 
-import PostCard from "../components/postCard"
 
-import PostCardSite from "../components/postCardSite"
+import PostCardSite from "../components/linksToPosts/postCardSite"
 
 import "../style/normalize.css"
 import "../style/all.scss"
@@ -22,7 +21,7 @@ const BlogIndex = ({ data }, location) => {
   let postCounter = 0
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutHome title={siteTitle}>
       <SEO title="Home" keywords={[`quantum`, `chemistry`, `programming`, `projects`, ]}/>
       {data.site.siteMetadata.description && (
         <header className="page-head">
@@ -51,7 +50,7 @@ const BlogIndex = ({ data }, location) => {
         })}
       </div>
       </article>
-    </Layout>
+    </LayoutHome>
   )
 }
 

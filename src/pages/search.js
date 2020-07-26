@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, graphql } from "gatsby";
 
-import Layout from "../components/layout"
+import LayoutHome from "../components/home_layout"
 import SEO from "../components/seo"
-import PostLink from "../components/post-link"
+import PostLink from "../components/linksToPosts/post-link"
 
 const BlogIndex = props => {
   
@@ -28,7 +28,7 @@ const BlogIndex = props => {
     const filteredData = posts.filter(post => {
       const { description, title, tags } = post.node.frontmatter
       return (
-        description.toLowerCase().includes(query.toLowerCase()) ||
+        (description && description.toLowerCase().includes(query.toLowerCase())) ||
         title.toLowerCase().includes(query.toLowerCase()) ||
         (tags &&
           tags
@@ -54,7 +54,7 @@ const BlogIndex = props => {
     .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutHome title={siteTitle}>
         <SEO
           // title={`#${tag}`}
           title={`Search`}
@@ -62,7 +62,7 @@ const BlogIndex = props => {
         />
         <article className="post-content-blog page-template no-image">
       <h1 style={{ textAlign: `center` }}>Search</h1>
-
+      
       <div className="searchBox">
         <input
           className="searchInput"
@@ -72,6 +72,7 @@ const BlogIndex = props => {
           onChange={handleInputChange}
         />
       </div>
+      Warning: this search feature is rather basic! If you type 'bicycle koala' it will search for that string, not both words seperately.
 
       <div className="grids-blog">
         {Posts}
@@ -81,29 +82,24 @@ const BlogIndex = props => {
         const { excerpt } = node
 
         const { slug } = node.fields
-        const { tags, title, date, description } = node.frontmatter
+        const { title, date, description } = node.frontmatter
         return (
           <article key={slug}>
-            <header>
-              <h2>
+              <h2 >
                 <Link to={slug}>{title}</Link>
               </h2>
-
-              <p>{date}</p>
-            </header>
-            <section>
+              {date}
               <p
                 dangerouslySetInnerHTML={{
                   __html: description || excerpt,
                 }}
               />
-            </section>
             <hr />
           </article>
         )
       })}
       </article>
-    </Layout>
+    </LayoutHome>
   )
 }
 
@@ -120,7 +116,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
       edges {
         node {
-          excerpt(pruneLength: 200)
+          excerpt(pruneLength: 300)
           id
           frontmatter {
             title

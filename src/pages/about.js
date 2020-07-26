@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
-import Layout from "../components/layout"
+import LayoutHome from "../components/home_layout"
 import SEO from "../components/seo"
 
 import "../style/normalize.css"
@@ -12,7 +12,7 @@ const AboutPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutHome title={siteTitle}>
       <SEO title="About" />
       <article className="post-content page-template no-image">
         <div className="post-content-body">
@@ -44,7 +44,7 @@ const AboutPage = ({ data }, location) => {
         </p>
         </div>
       </article>
-    </Layout>
+    </LayoutHome>
   )
 }
 
@@ -56,7 +56,7 @@ const indexQuery = graphql`
       }
     }
     benchAccounting: file(
-      relativePath: { eq: "pp_ruben_online.png" }
+      relativePath: { eq: "assets/pp_ruben_online.png" }
     ) {
       childImageSharp {
         fluid(maxWidth: 1360) {

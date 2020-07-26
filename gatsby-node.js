@@ -6,6 +6,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const docPost = path.resolve('./src/templates/doc-post.js')
   const tagPage = path.resolve(`./src/templates/tag-page.js`)
   
   return graphql(
@@ -49,15 +50,28 @@ exports.createPages = ({ graphql, actions }) => {
         });
       }
 
-      createPage({
-        path: post.node.fields.slug,
-        component: blogPost,
-        context: {
-          slug: post.node.fields.slug,
-          previous,
-          next,
-        },
-      })
+      // Based on the slug (relative path we create either a blog or docs post)
+      if (post.node.fields.slug.includes("docs")) {
+        createPage({
+          path: post.node.fields.slug,
+          component: docPost,
+          context: {
+            slug: post.node.fields.slug,
+            previous,
+            next,
+          },
+        })
+      } else if (post.node.fields.slug.includes("projects")) {
+        createPage({
+          path: post.node.fields.slug,
+          component: blogPost,
+          context: {
+            slug: post.node.fields.slug,
+            previous,
+            next,
+          },
+        })
+      }
     })
 
     // Create tags pages.

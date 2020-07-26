@@ -1,10 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/basic_layout"
 import SEO from "../components/seo"
-import PostCard from "../components/postCard"
-import PostLink from "../components/post-link"
+import PostLink from "../components/linksToPosts/post-link"
 
 class TagPageTemplate extends React.Component {
   render() {

@@ -2,9 +2,9 @@ import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
-import Layout from "../components/layout"
+import LayoutHome from "../components/home_layout"
 import SEO from "../components/seo"
-import PostLink from "../components/post-link"
+import PostLink from "../components/linksToPosts/post-link"
 
 import "katex/dist/katex.min.css"
 
@@ -19,7 +19,7 @@ const ProjectsPage = ({ data }) =>{
   .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutHome title={siteTitle}>
       <SEO
         title="Projects"
       />
@@ -32,7 +32,7 @@ const ProjectsPage = ({ data }) =>{
       
       </div>
       </article>
-    </Layout>
+    </LayoutHome>
   )
 }
 

@@ -1,23 +1,24 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
+import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/basic_layout"
 import SEO from "../components/seo"
 
-require(`katex/dist/katex.min.css`)
 
 import "../style/normalize.css"
 import "../style/all.scss"
 
+require(`katex/dist/katex.min.css`)
 
-class BlogPostTemplate extends React.Component {
+
+class PostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
 
+
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout tableOfContents={post.tableOfContents} location={this.props.location} title={siteTitle}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
@@ -44,10 +45,6 @@ class BlogPostTemplate extends React.Component {
           />
 
           <footer className="post-content-footer">
-            {/* There are two options for how we display the byline/author-info.
-        If the post has more than one author, we load a specific template
-        from includes/byline-multiple.hbs, otherwise, we just use the
-        default byline. */}
           </footer>
         </article>
       </Layout>
@@ -55,7 +52,7 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
+export default PostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -69,6 +66,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+      tableOfContents(maxDepth: 2)
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

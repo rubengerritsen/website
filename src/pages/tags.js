@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Link } from "gatsby";
 import { graphql, StaticQuery } from "gatsby"
 
-import Layout from "../components/layout"
+import LayoutHome from "../components/home_layout"
 import SEO from "../components/seo"
 
 import "../style/normalize.css"
@@ -14,7 +14,7 @@ const TagIndex = ({ data }) => {
   const tags = data.allMarkdownRemark.distinct
 
   return (
-    <Layout title={siteTitle}>
+    <LayoutHome title={siteTitle}>
       <SEO
         title="Tags" 
       />
@@ -34,7 +34,7 @@ const TagIndex = ({ data }) => {
             )
           })}
         </div>
-    </Layout>
+    </LayoutHome>
   )
 }
 
