@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React from 'react';
-import mediaqueries from '../../styles/media';
 import Navigation from './Navigation';
 
-import config from '../../../config.js';
+import config from '../../../configNav.js';
 
 const LeftSidebar = ({ navOpen }) => {
   return (

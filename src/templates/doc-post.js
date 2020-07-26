@@ -5,7 +5,7 @@ import LayoutDocs from "../components/docs_layout"
 import NextPrevious from '../components/NextPrevious';
 import SEO from "../components/seo"
 //import NextPrevious from '../components/NextPrevious';
-import config from '../../config';
+import config from '../../configNav';
 
 require(`katex/dist/katex.min.css`)
 
@@ -84,7 +84,7 @@ export default class MDRuntime extends Component {
         />
         
          <article
-          className={`post-content ${post.frontmatter.thumbnail || `no-image`}`}
+          className={`post-content no-image`}
         >
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
@@ -127,13 +127,6 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
-        thumbnail {
-          childImageSharp {
-            fluid(maxWidth: 1360) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
       }
     }
     allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(docs)/"  }}) {
@@ -149,13 +142,6 @@ export const pageQuery = graphql`
             title
             description
             tags
-            thumbnail {
-              childImageSharp {
-                fluid(maxWidth: 1360) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
           }
         }
       }

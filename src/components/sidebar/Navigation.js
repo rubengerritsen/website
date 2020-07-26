@@ -112,7 +112,7 @@ const Navigation = () => {
           }
         }
       }
-      allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(docs)/"  }}, sort: { fields: [frontmatter___path], order: ASC }) {
+      allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(docs)/"  }}, sort: { fields: [fields___slug], order: ASC }) {
         edges {
           node {
             fields {

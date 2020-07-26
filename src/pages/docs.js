@@ -7,16 +7,16 @@ import SEO from "../components/seo"
 import "../style/normalize.css"
 import "../style/all.scss"
 
-const AboutPage = ({ data }, location) => {
+const DocsPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
     <LayoutDocs title={siteTitle}>
-      <SEO title="About" />
+      <SEO title="Docs" />
       <article className="post-content page-template no-image">
         <div className="post-content-body">
           <h2>
-            Quantum Mechanics & Chemistry
+            Landing page for the docs
           </h2>
           <p>
             Nothing here yet.
@@ -72,7 +72,7 @@ export default props => (
   <StaticQuery
     query={indexQuery}
     render={data => (
-      <AboutPage location={props.location} data={data} {...props} />
+      <DocsPage location={props.location} data={data} {...props} />
     )}
   />
 )

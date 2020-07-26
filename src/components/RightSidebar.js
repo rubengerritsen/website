@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import mediaqueries from '../styles/media';
+import mediaqueries from '../style/media';
 import ListItem from './ListItem';
 
 const RightSidebar = ({ tableOfContents, location }) => {

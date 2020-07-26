@@ -94,33 +94,6 @@ body {
   }
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background-color: yellow;
-  padding: 50px;
-  font-size: 20px;
-}
-
-.greenCircle {
-  width: 8px;
-  height: 8px;
-  background-color: #1cd3c6;
-  border-radius: 50%;
-  margin: 0 12px;
-}
-
-.headerNav {
-  font-family: 'Roboto';
-  padding: 0px 24px;
-  color: #001933;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1em;
-}
-
-
 @media (max-width: 850px){
   .hiddenMobile {
     display: none !important;
@@ -128,7 +101,7 @@ body {
 }
 
 /* ---------------------------------------------------------- */
-/* Layout
+/* Blog and Home Layout
 /* ---------------------------------------------------------- */
 
 .site-wrapper {
@@ -152,34 +125,6 @@ body {
   text-align: center;
 }
 
-.error-head {
-  height: 75vh;
-}
-
-.error-head h1 {
-  margin: 0;
-  font-size: 7rem;
-  line-height: 1.1em;
-  font-weight: $font-heavy;
-  letter-spacing: 10px;
-}
-
-.error-head p {
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $dark-base;
-  @include light-mode {
-    color: $light-base;
-  }
-}
-
-.error-link {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  text-decoration: underline;
-}
-
 .page-head-title {
   margin: 0;
   text-align: center;
@@ -192,22 +137,6 @@ body {
 @media (max-width: 500px) {
   .page-head-title {
     font-size: 2rem;
-  }
-}
-
-.page-head-description {
-  margin: 0 0 1.6vw;
-  color: color($dark-border l(-20%));
-  @include light-mode{
-    color: color($light-border l(-20%));
-  }
-  font-size: 2.2rem;
-  line-height: 1.35em;
-}
-
-@media (max-width: 500px) {
-  .page-head-description {
-    font-size: 1.6rem;
   }
 }
 

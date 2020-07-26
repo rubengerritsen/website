@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Second Chapter
 tags: [markdown, math, floats]
 description: Lorem Ipsum
 thumbnail: ./dummy.png

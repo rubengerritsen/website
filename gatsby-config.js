@@ -1,6 +1,6 @@
 const siteParams = require("./siteParams")
 const urljoin = require("url-join")
-const sideParams = require("./config")
+const sideParams = require("./configNav")
 
 module.exports = {
   siteMetadata: {

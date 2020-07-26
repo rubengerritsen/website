@@ -3,10 +3,7 @@ import { Link } from "gatsby";
 import styled from '@emotion/styled';
 import LeftSidebar from './sidebar';
 import RightSidebar from './RightSidebar';
-import config from '../../config.js';
-//import { Styled } from 'theme-ui';
-//import { globalStyles } from '../../styles';
-import mediaqueries from '../styles/media';
+import config from '../../configNav.js';
 
 
 const Wrapper = styled('div')`

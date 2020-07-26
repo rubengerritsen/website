@@ -90,11 +90,11 @@ input[type="button"]:hover,
 button:hover,
 .button:hover {
     text-decoration: none;
-    color: color(#{$dark-primary} l(-100%)) !important;
+    color: color(#{$dark-primary} l(-10%)) !important;
     box-shadow: none;
     transition: 0.2s ease;
     @include light-mode {
-      color: color(#{$light-primary} l(-100%)) !important;
+      color: color(#{$light-primary} l(-10%)) !important;
       box-shadow: none;
     }
 }
