@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import LayoutDocs from "../components/docs_layout"
 import NextPrevious from '../components/NextPrevious';
@@ -80,11 +80,11 @@ export default class MDRuntime extends Component {
           description={post.frontmatter.description || post.excerpt}
         />
         
-         <article
-          className={`post-content no-image`}
-        >
+         <article className={`post-content no-image`} >
+         
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+          <div className="visibleMobile">&#8249;<Link to={`/docs`}>{" table of contents"}</Link> </div> 
           <h1 className="post-title-docs">{post.frontmatter.title}</h1>
           <hr-title />
           <div

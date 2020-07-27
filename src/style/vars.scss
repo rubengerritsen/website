@@ -46,15 +46,14 @@ $light-pl-bdr: #eee;
 $light-pl-shadow: #d5d5d5;
 $light-pl-hover: #b1b1b1;
 // sb -> sidebar
-$light-sb-bg-title: #dddcdc;
-$light-sb-title: #131313;
+$light-sb-title: #e0f0f3;
 
 
 /**********************/
 /* Colours Dark Mode */
 /**********************/
 $dark-body-font: #cacac2;
-$dark-primary:#6BB8FF; //used for blockquote in md
+$dark-primary:#00529E; //used for blockquote in md
 $dark-base: #131313;
 $dark-sub-base: #aaa;
 $dark-border: #f5f5f7;
@@ -69,8 +68,7 @@ $dark-pl-bdr: rgb(63, 61, 61);
 $dark-pl-shadow: #000000;
 $dark-pl-hover: #969592;
 // sb -> sidebar
-$dark-sb-bg-title: #292b81;
-$dark-sb-title: #131313;
+$dark-sb-title: #cacac2;
 
 /***************************/
 /* Shared Colors

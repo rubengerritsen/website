@@ -4,9 +4,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import NavItem from './NavItem';
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider';
 
-/**
- * This File was inspired by https://github.com/hasura/gatsby-gitbook-starter
- */
 
 const calculateTreeData = (edges, sidebarConfig) => {
   const originalData = sidebarConfig.ignoreIndex
@@ -91,11 +88,10 @@ const calculateTreeData = (edges, sidebarConfig) => {
     });
     const index = prevItems.findIndex(({ label }) => label === parts[parts.length - 1]);
     accu.items.unshift(prevItems.splice(index, 1)[0]);
-    console.log("accu")
-    console.log(accu)
     return accu;
   }, tree);
 };
+
 
 const Navigation = () => {
   const result = useStaticQuery(graphql`

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import mediaqueries from '../style/media';
 import ListItem from './ListItem';
 
 const RightSidebar = ({ tableOfContents}) => {
@@ -33,9 +32,7 @@ overflow-x: hidden;
   font-weight: 700;
   padding: 1rem;
   max-width: 200px;
-  ${mediaqueries.desktop_medium_up`
-    display: block
-  `};
+    display: block;
 `;
 
 const RightSidebarTitle = styled.p`
@@ -46,6 +43,8 @@ const RightSidebarTitle = styled.p`
 `;
 
 const RightSidebarList = styled.ul`
+  display: block;
+  overflow: hidden;
   height: 100vh;
   font-size: 1.2rem;
   margin: 0;

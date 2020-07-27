@@ -26,14 +26,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/home`,
-        name: `data`,
+        name: `home`,
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-json`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-offline`,
+    `gatsby-plugin-remove-serviceworker`,
     'gatsby-plugin-sass',
     {
       resolve: `gatsby-plugin-manifest`,

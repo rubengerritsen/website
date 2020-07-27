@@ -67,14 +67,22 @@ body {
 /* ---------------------------------------------------------- */
 /* Docs-Layout
 /* ---------------------------------------------------------- */
+
+.sidebarTitle a {
+  color: $dark-sb-title;
+  @include light-mode{
+    color: $light-sb-title;
+  }
+}
+
 .sidebarTitle {
   position: sticky;
     top: 0;
-  background-color: $dark-sb-bg-title;
-  color: $dark-body-font;
+  background-color: $dark-primary;
+  color: $dark-sb-title; 
   @include light-mode{
-    background-color: $light-sb-bg-title;
-    color: $light-body-font;
+    background-color: $light-primary;
+    color: $light-sb-title;
   }
   padding: 18px 16px;
   font-size: 18px;
@@ -87,10 +95,19 @@ body {
   display: none;
 }
 
-.sidebarTitle a {
-  color: $dark-sb-title;
-  @include light-mode{
-    color: $light-sb-title;
+.visibleMobile{
+  display: none;
+}
+
+@media (max-width: 850px){
+  .visibleMobile {
+    display: inline-block !important;
+    color: $dark-link;
+    font-size: 0.9em;
+    margin: 5px 0px 20px 0px;
+    @include light-mode {
+      color: $light-link;
+    }
   }
 }
 
@@ -103,6 +120,65 @@ body {
 /* ---------------------------------------------------------- */
 /* Blog and Home Layout
 /* ---------------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  background: $dark-bg;
+
+  .sideBarUL li a {
+    color: $dark-body-font;
+  }
+
+  @media only screen and (max-width: 850px) {
+    display: block;
+  }
+
+  @include light-mode {
+    background: $light-bg;
+    .sideBarUL li a {
+      color: $light-body-font;
+    }
+  }
+}
+
+.site-content {
+  display: flex;
+  flex-grow: 1;
+  margin: 0px 8px;
+  padding-top: 3rem;
+  background: $dark-bg;
+  padding-left: 0;
+
+  table tr {
+    background: $dark-bg;
+
+    @include light-mode {
+      background: $light-bg;
+    }
+  }
+
+  @include light-mode {
+    background: $light-bg;
+  }
+}
+
+.site-content-maxWidth {
+  width: 70vw;
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    position: relative;
+  }
+}
+
+.site-content-maxWidth-blog {
+  width: 70vw;
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    position: relative;
+  }
+}
 
 .site-wrapper {
   min-height: 100vh;
@@ -166,15 +242,22 @@ body {
   z-index: 300;
   font-size: 1.35rem;
   box-shadow: #000;
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  -webkit-box-shadow: -1px 0px 4px 1px rgb(0, 0, 0);
+
+  @include light-mode {
+    box-shadow: #000;
+    -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  }
 }
 
 .site-head-docs {
   background-color: $dark-bg;
   box-shadow: #000;
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  -webkit-box-shadow: -1px 0px 4px 1px rgb(0,0,0);
   @include light-mode {
     background-color: $light-bg;
+    box-shadow: #000;
+  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
   } 
 }
 
@@ -250,7 +333,7 @@ body {
     background: rgba(255, 255, 255, 0);
     z-index: -1;
     transition: all 0.4s ease-out;
-    overflow: visible;
+    overflow: hidden;
   }
   .site-head-left,
   .site-head-right {
@@ -308,7 +391,7 @@ body {
     background: $dark-bg;
     transition: background 0.5s ease-out;
     transition-delay: 0.25;
-    overflow: visible;
+    overflow: hidden;
     height: 100vh;
     @include light-mode {
       background: $light-bg;
@@ -370,7 +453,7 @@ body {
   height: 25vw;
   background: linear-gradient(135deg, #242426 0%, #161618 100%) center center;
   background-size: cover;
-  overflow: visible;
+  overflow: hidden;
   counter-increment: posts;
 }
 
@@ -453,7 +536,7 @@ and (min-width: 2000px){
   align-content: center;
   position: relative;
   padding: 18px 0px 18px 0px;
-  overflow: visible;
+  overflow: hidden;
   > * {
     position: relative;
     z-index: 2;
@@ -678,7 +761,7 @@ and (min-width: 2000px){
   border-radius: 9px;
   border: 1px solid $dark-pl-bdr;
   box-shadow: 0 0 30px $dark-pl-shadow;
-  overflow: visible;
+  overflow: hidden;
   line-height: 1.5;
   @include light-mode {
     background-color: $light-pl-bg;
@@ -993,23 +1076,31 @@ and (min-width: 2000px){
  **********************************************/
 .sidebarButton{
   float: right;
-  position: relative;
+  position: absolute;
   right: 0 !important;
-  padding: 0 0rem;
+  padding: 0 1.5em 0rem 0rem;
   height: 20px;
   width: 20px;
   background: none !important;
   box-shadow: none !important;
   border: none !important;
-  color: $dark-body-font;
+  color: $dark-body-font !important;
   font-size: 1rem;
 }
 
-@media (max-width: 767px) {
-.hiddenMobile {
-  display: none !important;
+.sidebarButton:focus {
+    /* Adds a white border around the button, along with a blue glow. The white and blue have a color contrast ratio of at least 3:1, which means this will work against any background color. */
+    box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #b8118e;
 }
+
+.sidebarButton >svg >path {
+  fill: $dark-body-font !important;
+  @include light-mode {
+    fill: $light-body-font !important;
+  }
 }
+
+
 
 .sideBarUL {
   margin-top: 5px;
@@ -1027,7 +1118,12 @@ and (min-width: 2000px){
   top: 0;
   padding-right: 0;
   box-shadow: #000;
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+    -webkit-box-shadow: -1px 0px 4px 1px rgb(0,0,0);
+
+  @include light-mode {
+    box-shadow: #000;
+    -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  }
 
   @media only screen and (max-width: 1023px) {
     width: 100%;
@@ -1090,6 +1186,9 @@ and (min-width: 2000px){
 
   @include light-mode{
     background: $light-bg;
+    table tr {
+      background: $light-bg;
+    }
   }
 
   @media only screen and (max-width: 1023px) {
@@ -1105,12 +1204,15 @@ and (min-width: 2000px){
 
 .nextPreviousWrapper {
   margin: 0px;
-  padding: 0px;
+  padding: 5px;
   width: auto;
   display: grid;
   grid-template-rows: auto;
   column-gap: 24px;
   grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: 90%;
+  }
 }
 
 .previousBtn {
@@ -1125,13 +1227,18 @@ and (min-width: 2000px){
   flex-direction: row;
   align-items: center;
   place-self: stretch;
-  color: rgb(36, 42, 49);
-  background-color: rgb(255, 255, 255);
+  color: $dark-body-font;
+  background-color: $dark-bg;
   border-radius: 3px;
   border: 1px solid rgb(230, 236, 241);
   transition: border 200ms ease 0s;
   box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
   text-decoration: none;
+
+  @include light-mode {
+    color: $light-body-font;
+    background-color: $light-bg;
+  }
 }
 
 .leftArrow {
@@ -1191,13 +1298,18 @@ and (min-width: 2000px){
   flex-direction: row;
   align-items: center;
   place-self: stretch;
-  color: rgb(36, 42, 49);
-  background-color: rgb(255, 255, 255);
+  color: $dark-body-font;
+  background-color: $dark-bg;
   border-radius: 3px;
   border: 1px solid rgb(230, 236, 241);
   transition: border 200ms ease 0s;
   box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
   text-decoration: none;
+
+  @include light-mode {
+    color: $light-body-font;
+    background-color: $light-bg;
+  }
 }
 
 .rightArrow {
@@ -1233,4 +1345,8 @@ and (min-width: 2000px){
   @include light-mode {
     color: $light-primary;
   }
+}
+
+.tableOfContents li {
+  line-height: 1.1em;
 }

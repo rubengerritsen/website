@@ -19,7 +19,6 @@ const BlogIndex = props => {
   })
 
   const handleInputChange = event => {
-    console.log(event.target.value)
     const query = event.target.value
     const { data } = props
 
@@ -61,7 +60,7 @@ const BlogIndex = props => {
           keywords={[`search`]}
         />
         <article className="post-content-blog page-template no-image">
-      <h1 style={{ textAlign: `center` }}>Search</h1>
+      <h2 style={{ textAlign: `center` }}>Search</h2>
       
       <div className="searchBox">
         <input

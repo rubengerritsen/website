@@ -43,9 +43,6 @@ class PostTemplate extends React.Component {
             className="post-content-body"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
-
-          <footer className="post-content-footer">
-          </footer>
         </article>
       </Layout>
     )

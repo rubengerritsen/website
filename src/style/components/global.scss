@@ -162,7 +162,7 @@ img {
     border: 0;
 }
 svg:not(:root) {
-    overflow: visible;
+    overflow: hidden;
 }
 mark {
     background-color: #fdffb6;
@@ -235,7 +235,7 @@ legend {
     border: 0;
 }
 textarea {
-    overflow: visible;
+    overflow: hidden;
 }
 table {
     border-spacing: 0;

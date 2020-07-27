@@ -6,10 +6,11 @@ import styled from '@emotion/styled';
 
 const Wrapper = styled('div')`
   display: flex;
-  justify-content: space-between;
-  background: #f8f8f8;
+  width: 100%
+  justify-content: flex-start;
+  background: $dark-bg;
 
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: 850px) {
     display: block;
   }
 `;
@@ -78,31 +79,31 @@ const Layout = props => {
         </div>
       </header>
 
-      <Wrapper>
+      <div className="wrapper">
 
 
       {tableOfContents && (
-            <RightSideBarWidthFake className={'hiddenMobile'}>
+            <RightSideBarWidthFake className="hiddenMobile">
           <RightSidebar tableOfContents={tableOfContents} />
           </RightSideBarWidthFake>
       )}
 
-      <main id="site-main" className="site-main">
-        <div id="swup" className="transition-fade">
-          {children}
-        </div>
+      <main className="site-content">
+      <div className="site-content-maxWidth-blog">{children}</div>
       </main>
 
       {tableOfContents && (
-            <RightSideBarWidth className={'hiddenMobile'}>
+            <RightSideBarWidth className="hiddenMobile">
           <RightSidebar tableOfContents={tableOfContents} />
           </RightSideBarWidth>
       )}
-      </Wrapper>
+      </div>
 
       <footer className="site-foot">
       <Link to={`/`}>{title}</Link> 
       </footer>
+
+      
     </div>
   )
 }
