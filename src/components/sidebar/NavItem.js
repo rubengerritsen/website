@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+
 import { Link } from 'gatsby';
 import React, { useContext } from 'react';
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider';
@@ -10,12 +10,14 @@ const NavItem = ({ item }) => {
   const state = useContext(GlobalStateContext);
   const dispatch = useContext(GlobalDispatchContext);
 
-  
+
   const isCollapsed = state.collapsed[item.url];
   const hasChildren = item.items && item.items.length > 0;
   return (
     <li>
-      <Link to={item.url} activeClassName="is-active">
+      <Link onClick={() => {
+            dispatch({ type: 'SET_NAV_OPEN', url: item.url });
+          }} to={item.url} activeClassName="is-active">
         {item.title}
       </Link>
 

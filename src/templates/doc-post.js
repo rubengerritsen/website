@@ -73,9 +73,6 @@ export default class MDRuntime extends Component {
       const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
 
-    console.log("toc")
-    console.log(post.tableOfContents)
-
       return (
         <LayoutDocs tableOfContents={post.tableOfContents} {...this.props}>
           <SEO

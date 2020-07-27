@@ -11,7 +11,10 @@ const config = {
     forcedNavOrder: [
       '/docs/introduction/', // add trailing slash if enabled above
       '/docs/second/',
+      '/docs/second/0codeblockSub/',
+      '/docs/second/1codeblockSub/',
       '/docs/third/',
+      '/docs/third/0codeblockSub/',
     ],
     links: [{ text: 'Google', link: 'https://google.com' }],
     frontline: false,

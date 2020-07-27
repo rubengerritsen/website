@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Add from './icons/Add';
-import Icon from './icons/Icon';
-import Minimize from './icons/Minimize';
+import OpenedSvg from '../images/opened';
+import ClosedSvg from '../images/closed';
 
 const ButtonCollapse = ({ onClick, isCollapsed }) => {
   return (
@@ -12,7 +11,7 @@ const ButtonCollapse = ({ onClick, isCollapsed }) => {
       aria-label="Toggle Subnavigation"
       title="Toggle Subnavigation"
     >
-      {isCollapsed ? <Icon icon={<Add />} size={15} /> : <Icon icon={<Minimize />} size={15} />}
+      {isCollapsed ?   <ClosedSvg /> : <OpenedSvg />}
     </button>
   );
 };

@@ -39,7 +39,7 @@ const BlogIndex = ({ data }, location) => {
           postCounter++
           return (
             <PostCardSite
-            key="fiets"
+            key={node.displayName}
             pageLink={node.pageLink}
             count={postCounter}
             displayName ={node.displayName}

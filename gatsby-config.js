@@ -1,6 +1,7 @@
 const siteParams = require("./siteParams")
 const urljoin = require("url-join")
 const sideParams = require("./configNav")
+const { nodeModuleNameResolver } = require("typescript")
 
 module.exports = {
   siteMetadata: {
@@ -40,7 +41,6 @@ module.exports = {
         name: siteParams.title,
         short_name: siteParams.shortName,
         start_url: `/`,
-        //icon: `src/images/gatsby-icon.png`,
       },
     },
     {

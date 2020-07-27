@@ -4,7 +4,7 @@ export const GlobalStateContext = React.createContext();
 export const GlobalDispatchContext = React.createContext();
 
 const initialState = {
-  collapsed: true
+  collapsed: {}
 };
 
 function reducer(state, action) {
@@ -17,9 +17,25 @@ function reducer(state, action) {
           [action.url]: !state.collapsed[action.url]
         }
       };
+    case 'SET_NAV_COLLAPSED':
+      return {
+        ...state,
+        collapsed: {
+          ...state.collapsed,
+          [action.url]: true
+        }
+      };
+      case 'SET_NAV_OPEN':
+      return {
+        ...state,
+        collapsed: {
+          ...state.collapsed,
+          [action.url]: false
+        }
+      };
     default:
       return {
-        ...state
+        ...state,
       };
   }
 }

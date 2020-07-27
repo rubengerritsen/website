@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import mediaqueries from '../style/media';
 import ListItem from './ListItem';
 
-const RightSidebar = ({ tableOfContents, location }) => {
+const RightSidebar = ({ tableOfContents}) => {
    return (
     <RightSidebarWrapper>
         <RightSidebarTitle>Contents</RightSidebarTitle>

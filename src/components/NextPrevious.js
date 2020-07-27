@@ -1,9 +1,12 @@
 import React from 'react';
 import Link from "./link";
-import '../style/stylesNextPrev.css';
+
+
 class NextPrevious extends React.Component {
   render() {
     const { markdownRemark, nav } = this.props;
+    console.log("nav")
+    console.log(nav)
     let currentIndex;
     const currentPaginationInfo = nav.map((el, index) => {
       if (el && (el.url === markdownRemark.fields.slug)) {

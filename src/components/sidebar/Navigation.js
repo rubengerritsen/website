@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { graphql, useStaticQuery } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import NavItem from './NavItem';
+import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider';
 
 /**
  * This File was inspired by https://github.com/hasura/gatsby-gitbook-starter
@@ -65,13 +66,10 @@ const calculateTreeData = (edges, sidebarConfig) => {
   const forcedNavOrder = sidebarConfig.forcedNavOrder || [];
   const tmp = [...forcedNavOrder];
   tmp.reverse();
-  console.log("temp")
-  console.log(tmp)
   return tmp.reduce((accu, slug) => {
     const parts = slug.slice(1,-1).split('/');
-    console.log(parts)
     let { items: prevItems } = accu;
-    for (const part of parts.slice(1, -1)) {
+    for (const part of parts.slice(1, -2)) {
       let tmp = prevItems.find(({ label }) => label === part);
       if (tmp) {
         if (!tmp.items) {
@@ -93,6 +91,8 @@ const calculateTreeData = (edges, sidebarConfig) => {
     });
     const index = prevItems.findIndex(({ label }) => label === parts[parts.length - 1]);
     accu.items.unshift(prevItems.splice(index, 1)[0]);
+    console.log("accu")
+    console.log(accu)
     return accu;
   }, tree);
 };
@@ -131,6 +131,18 @@ const Navigation = () => {
   const [treeData] = useState(() => {
     return calculateTreeData(allMarkdownRemark.edges, sidebarConfig);
   });
+
+
+  /* Code to default collapse all items in search bar */
+  const state = useContext(GlobalStateContext);
+  const dispatch = useContext(GlobalDispatchContext);
+
+  treeData.items.forEach(item => {
+    if (item.url && !state.collapsed.hasOwnProperty(item.url)){
+        dispatch({ type: 'SET_NAV_COLLAPSED', url: item.url });
+    }
+  });
+
   return (
     <ul className={'sideBarUL'}>
       {treeData.items.map(item => (

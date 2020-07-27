@@ -30,7 +30,10 @@ const LayoutHome = props => {
                 <Link to={`/`}>Home</Link>
               </li> 
               <li className="nav-tags" role="menuitem">
-                <Link to={`/tags`}>Tags</Link>
+                <Link to={`/docs`}>Docs</Link>
+              </li>
+              <li className="nav-tags" role="menuitem">
+                <Link to={`/projects`}>Projects</Link>
               </li>
               <li className="nav-tags" role="menuitem">
                 <Link to={`/search`}>Search</Link>

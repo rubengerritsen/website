@@ -62,7 +62,10 @@ const Layout = props => {
                 <Link to={`/`}>Home</Link>
               </li> 
               <li className="nav-tags" role="menuitem">
-                <Link to={`/tags`}>Tags</Link>
+                <Link to={`/docs`}>Docs</Link>
+              </li>
+              <li className="nav-tags" role="menuitem">
+                <Link to={`/projects`}>Projects</Link>
               </li>
               <li className="nav-tags" role="menuitem">
                 <Link to={`/search`}>Search</Link>
@@ -80,7 +83,7 @@ const Layout = props => {
 
       {tableOfContents && (
             <RightSideBarWidthFake className={'hiddenMobile'}>
-          <RightSidebar tableOfContents={tableOfContents} location={location} />
+          <RightSidebar tableOfContents={tableOfContents} />
           </RightSideBarWidthFake>
       )}
 
@@ -92,7 +95,7 @@ const Layout = props => {
 
       {tableOfContents && (
             <RightSideBarWidth className={'hiddenMobile'}>
-          <RightSidebar tableOfContents={tableOfContents} location={location} />
+          <RightSidebar tableOfContents={tableOfContents} />
           </RightSideBarWidth>
       )}
       </Wrapper>
