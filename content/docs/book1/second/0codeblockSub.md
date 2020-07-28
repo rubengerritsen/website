@@ -1,8 +1,8 @@
 ---
-title: "2.2"
+title: "2.1"
 tags: [markdown, math, floats]
 description: Lorem Ipsum
-thumbnail: ../dummy.png
+thumbnail: ../../dummy.png
 ---
 
 Vivamus lectus ligula, facilisis in mauris nec, interdum dapibus ligula. Maecenas pellentesque tristique ante quis eleifend. Aenean ac finibus odio. Maecenas risus dolor, dictum eget congue et, tempor et odio. Maecenas eu vestibulum sapien. Aliquam interdum eros nec enim dignissim, eu ultrices ante viverra. Praesent vulputate dolor elit, id suscipit erat maximus id. Suspendisse potenti. Praesent dapibus arcu in semper aliquet.

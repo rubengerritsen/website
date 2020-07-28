@@ -140,9 +140,9 @@ const Navigation = () => {
   });
 
   return (
-    <ul className={'sideBarUL'}>
+    <ul className={'sideBarULBook'}>
       {treeData.items.map(item => (
-        <NavItem key={item.url} item={item} />
+        <NavItem key={item.url} item={item} liStyle="sideBarLIBook" />
       )) }
     </ul>
   );

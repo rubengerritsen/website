@@ -6,7 +6,7 @@ import ButtonCollapse from './ButtonCollapse';
 
 
 
-const NavItem = ({ item }) => {
+const NavItem = ({ item, liStyle }) => {
   const state = useContext(GlobalStateContext);
   const dispatch = useContext(GlobalDispatchContext);
 
@@ -14,7 +14,7 @@ const NavItem = ({ item }) => {
   const isCollapsed = state.collapsed[item.url];
   const hasChildren = item.items && item.items.length > 0;
   return (
-    <li>
+    <li  className={liStyle}>
       <Link onClick={() => {
             dispatch({ type: 'SET_NAV_OPEN', url: item.url });
           }} to={item.url} activeClassName="is-active">
@@ -32,11 +32,9 @@ const NavItem = ({ item }) => {
       {hasChildren && !isCollapsed && (
         <ul>
           {item.items.map(child => (
-            <li key={child.url}>
-              <Link to={child.url} activeClassName="is-active">
-                {child.title}
-              </Link>
-            </li>
+            <div>
+              <NavItem key={child.url} item={child} className="sideBarLIPage"/>
+            </div>
           ))}
         </ul>
       )}

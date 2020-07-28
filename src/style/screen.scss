@@ -127,7 +127,7 @@ body {
   justify-content: flex-start;
   background: $dark-bg;
 
-  .sideBarUL li a {
+  .sideBarULBook li a {
     color: $dark-body-font;
   }
 
@@ -137,7 +137,7 @@ body {
 
   @include light-mode {
     background: $light-bg;
-    .sideBarUL li a {
+    .sideBarULBook li a {
       color: $light-body-font;
     }
   }
@@ -1103,8 +1103,24 @@ and (min-width: 2000px){
   margin-top: 5px;
 }
 
+.sideBarLIBook {
+    padding: 1em;
+    list-style-position:outside;
+    list-style: none;
+    border-bottom: 1px solid $dark-border;
+  
+    @include light-mode {
+      border-bottom: 1px solid $light-border;
+    }
+  }
+
+
+.sideBarLIPage {
+  list-style-position:outside;
+}
+
 .sideBarAside {
-  width: 100%;
+  width: 220px;
   height: 100vh;
   padding-left: 0px;
   overflow-x: hidden;
@@ -1139,25 +1155,27 @@ and (min-width: 2000px){
 }
 
 
-
-.sideBarUL li {
-  margin: 0.1em;
+.sideBarULBook {
+  padding: 0em;
 }
 
-.sideBarUL li a {
+
+.sideBarULBook li {
+  margin: 0em;
+}
+
+.sideBarULBook li a {
   /* color: #fff; */
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
-  padding: 7px 24px 7px 16px;
-  padding-left: 10px;
-  padding-right: 25px;
+  padding: 0;
   border-style: solid none solid solid;
   border-width: 1px 0px 1px 1px;
   border-color: transparent currentcolor transparent transparent;
 }
 
-.sideBarUL .item {
+.sideBarULBook .item {
   list-style: none;
   padding: 0;
 }
