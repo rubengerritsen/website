@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/home_layout"
+import Layout from "../components/layouts/layout_home"
 import SEO from "../components/seo"
 import PostLink from "../components/linksToPosts/post-link"
 
@@ -17,7 +17,6 @@ class TagPageTemplate extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO
-          // title={`#${tag}`}
           title={`#${tag.charAt(0).toUpperCase() + tag.slice(1)}`}
           keywords={[`${tag}`, `blog`, `gatsby`, `javascript`, `react`]}
         />

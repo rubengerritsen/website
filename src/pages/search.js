@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, graphql } from "gatsby";
 
-import LayoutHome from "../components/home_layout"
+import LayoutHome from "../components/layouts/layout_home"
 import SEO from "../components/seo"
 import PostLink from "../components/linksToPosts/post-link"
 

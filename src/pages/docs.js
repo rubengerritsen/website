@@ -1,7 +1,7 @@
 import React, {useState, Link} from "react"
 import { graphql, StaticQuery, useStaticQuery } from "gatsby"
 
-import LayoutDocs from "../components/docs_layout"
+import LayoutDocs from "../components/layouts/layout_docs"
 import SEO from "../components/seo"
 
 
@@ -103,8 +103,6 @@ const DocsPage = ({ data }, location) => {
   const [treeData] = useState(() => {
     return calculateTreeData(allMarkdownRemark.edges, sidebarConfig);
   });
-
-  console.log(treeData);
 
   return (
     <LayoutDocs title={siteTitle}>

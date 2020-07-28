@@ -1086,14 +1086,11 @@ and (min-width: 2000px){
   border: none !important;
   color: $dark-body-font !important;
   font-size: 1rem;
-}
-
-.sidebarButton:focus {
-    /* Adds a white border around the button, along with a blue glow. The white and blue have a color contrast ratio of at least 3:1, which means this will work against any background color. */
-    box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #b8118e;
+  overflow: hidden;
 }
 
 .sidebarButton >svg >path {
+  overflow: hidden;
   fill: $dark-body-font !important;
   @include light-mode {
     fill: $light-body-font !important;
@@ -1140,6 +1137,8 @@ and (min-width: 2000px){
     height: auto;
   }
 }
+
+
 
 .sideBarUL li {
   margin: 0.1em;

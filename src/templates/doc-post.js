@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import { graphql, Link } from "gatsby"
 
-import LayoutDocs from "../components/docs_layout"
+import LayoutDocs from "../components/layouts/layout_docs"
 import NextPrevious from '../components/NextPrevious';
 import SEO from "../components/seo"
 //import NextPrevious from '../components/NextPrevious';

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from "gatsby";
+import React from "react"
+import { Link } from "gatsby"
+import RightSidebar from '../RightSidebar';
 import styled from '@emotion/styled';
-import LeftSidebar from './sidebar';
-import RightSidebar from './RightSidebar';
-import config from '../../configNav.js';
 
-const LeftSideBarWidth = styled('div')`
-  width: 298px;
-  position: sticky;
-  position: -webkit-sticky;
-  position: -moz-sticky;
-    top: 0;
-    
+
+const Wrapper = styled('div')`
+  display: flex;
+  width: 100%
+  justify-content: flex-start;
+  background: $dark-bg;
+
+  @media only screen and (max-width: 850px) {
+    display: block;
+  }
 `;
 
 const RightSideBarWidth = styled('div')`
@@ -19,21 +20,26 @@ const RightSideBarWidth = styled('div')`
   position: -webkit-sticky;
   position: -moz-sticky;
     top: 0;
+    right: 0;
+`;
+
+const RightSideBarWidthFake = styled('div')`
+visibility: hidden;
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+    top: 0;
+    right: 0;
 `;
 
 
 
-const LayoutDocs = props => {
-  const { title, children, location, tableOfContents } = props
+const Layout = props => {
+  const { title, children, tableOfContents } = props
   const [toggleNav, setToggleNav] = React.useState(false)
-  const [navOpen, setNavOpen] = useState(false);
   return (
-    
-    
-    
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
-    
-    <header className="site-head site-head-docs">
+      <header className="site-head">
         <div id="menu" className="site-head-container">
           <a
             className="nav-burger"
@@ -74,28 +80,32 @@ const LayoutDocs = props => {
       </header>
 
       <div className="wrapper">
-          <LeftSideBarWidth className={'hiddenMobile'}>
-            <LeftSidebar location={location} />
-          </LeftSideBarWidth>
-          {config.sidebar.title ? (
-            <div
-              className={'sidebarTitle sideBarShow'}
-              dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
-            />
-          ) : null}
 
-          <main className="site-content">      
-            <div className="site-content-maxWidth">{children}</div>
-          </main>
 
-          {tableOfContents && (
-            <RightSideBarWidth className={'hiddenMobile'}>
-          <RightSidebar tableOfContents={tableOfContents} location={location} />
+      {tableOfContents && (
+            <RightSideBarWidthFake className="hiddenMobile">
+          <RightSidebar tableOfContents={tableOfContents} />
+          </RightSideBarWidthFake>
+      )}
+
+      <main className="site-content">
+      <div className="site-content-maxWidth-blog">{children}</div>
+      </main>
+
+      {tableOfContents && (
+            <RightSideBarWidth className="hiddenMobile">
+          <RightSidebar tableOfContents={tableOfContents} />
           </RightSideBarWidth>
-        )}
-        </div> 
-        </div>
+      )}
+      </div>
+
+      <footer className="site-foot">
+      <Link to={`/`}>{title}</Link> 
+      </footer>
+
+      
+    </div>
   )
 }
 
-export default LayoutDocs;
+export default Layout

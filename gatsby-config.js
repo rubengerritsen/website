@@ -38,9 +38,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: siteParams.title,
+        name: siteParams.name,
         short_name: siteParams.shortName,
         start_url: `/`,
+        background_color: `#f8f8f8`,
+        theme_color: `#f8f8f8`,
+        display: `standalone`,
+        icon: `content/assets/blue_icon.png`,
+        icon_options: {
+          purpose: `maskable`,
+        },
       },
     },
     {

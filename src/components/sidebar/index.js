@@ -10,7 +10,7 @@ const LeftSidebar = ({ navOpen }) => {
     <aside className="hiddenMobile sideBarAside" >
        {config.sidebar.title ? (
             <div
-              className={'sidebarTitle hiddenMobile'}
+              className={'sidebarTitle'}
               dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
             />
           ) : null}

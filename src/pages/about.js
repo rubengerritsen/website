@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
-import LayoutHome from "../components/home_layout"
+import LayoutHome from "../components/layouts/layout_home"
 import SEO from "../components/seo"
 
 import "../style/normalize.css"

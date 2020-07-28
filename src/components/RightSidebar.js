@@ -18,8 +18,7 @@ const RightSidebar = ({ tableOfContents}) => {
 
 
 const RightSidebarWrapper = styled.aside`
-overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   position: -webkit-sticky;
   position: -moz-sticky;
   position: sticky;
@@ -32,6 +31,7 @@ overflow-x: hidden;
   font-weight: 700;
   padding: 1rem;
   max-width: 200px;
+  height: 100vh;
     display: block;
 `;
 
@@ -44,8 +44,9 @@ const RightSidebarTitle = styled.p`
 
 const RightSidebarList = styled.ul`
   display: block;
-  overflow: hidden;
-  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 80vh;
   font-size: 1.2rem;
   margin: 0;
   padding: 0;
