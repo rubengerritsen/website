@@ -33,7 +33,7 @@ const LayoutHome = props => {
                 <Link to={`/docs`}>Docs</Link>
               </li>
               <li className="nav-tags" role="menuitem">
-                <Link to={`/projects`}>Projects</Link>
+                <Link to={`/posts`}>Posts</Link>
               </li>
               <li className="nav-tags" role="menuitem">
                 <Link to={`/search`}>Search</Link>

@@ -14,27 +14,8 @@ import "../style/all.scss"
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 deckDeckGoHighlightElement();
 
-
-const BlogIndex = ({ data }, location) => {
-  const siteTitle = data.site.siteMetadata.title
-  const sites = data.allSiteListJson.edges
-  let postCounter = 0
-
-  return (
-    <LayoutHome title={siteTitle}>
-      <SEO title="Home" keywords={[`quantum`, `chemistry`, `programming`, `projects`, ]}/>
-      {data.site.siteMetadata.description && (
-        <header className="page-head">
-          <h2 className="page-head-title">
-            Welcome to Ruben's website!
-          </h2>
-          <p>
-            It is still under construction, so there isn't much to see :(
-          </p>
-        </header>
-      )}
-      <article className="home">
-      <div className="sub-pages">
+//Use postcards code
+/*<div className="sub-pages">
       {sites.map(({ node }) => {
           postCounter++
           return (
@@ -48,7 +29,25 @@ const BlogIndex = ({ data }, location) => {
           />
           )
         })}
-      </div>
+      </div> */
+
+
+const BlogIndex = ({ data }, location) => {
+  const siteTitle = data.site.siteMetadata.title
+  const sites = data.allSiteListJson.edges
+  let postCounter = 0
+
+  return (
+    <LayoutHome title={siteTitle}>
+      <SEO title="Home" keywords={[`quantum`, `chemistry`, `programming`, `projects` ]}/>
+      {data.site.siteMetadata.description && (
+        <header className="page-head">
+          <h2 className="page-head-title">
+          Under Construction
+          </h2>
+        </header>
+      )}
+      <article className="home">
       </article>
     </LayoutHome>
   )

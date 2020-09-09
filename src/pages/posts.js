@@ -11,7 +11,7 @@ import "katex/dist/katex.min.css"
 import "../style/normalize.css"
 import "../style/all.scss"
 
-const ProjectsPage = ({ data }) =>{
+const PostsPage = ({ data }) =>{
   const siteTitle = data.site.siteMetadata.title
 
   const Posts = data.allMarkdownRemark.edges
@@ -21,11 +21,11 @@ const ProjectsPage = ({ data }) =>{
   return (
     <LayoutHome title={siteTitle}>
       <SEO
-        title="Projects"
+        title="Posts"
       />
       <article className="post-content-blog page-template no-image">
         <div className="page-head-title">
-      <h2>Projects</h2>
+      <h2>Posts</h2>
       </div>
       <div className="grids-blog">
         {Posts}
@@ -43,7 +43,7 @@ const indexQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(projects)/"  }}, sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(posts)/"  }}, sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id
@@ -74,7 +74,7 @@ export default props => (
   <StaticQuery
     query={indexQuery}
     render={data => (
-      <ProjectsPage location={props.location} data={data} {...props} />
+      <PostsPage location={props.location} data={data} {...props} />
     )}
   />
 )

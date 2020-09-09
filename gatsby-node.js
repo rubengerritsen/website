@@ -61,7 +61,7 @@ exports.createPages = ({ graphql, actions }) => {
             next,
           },
         })
-      } else if (post.node.fields.slug.includes("projects")) {
+      } else if (post.node.fields.slug.includes("posts")) {
         createPage({
           path: post.node.fields.slug,
           component: blogPost,

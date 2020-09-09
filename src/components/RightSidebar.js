@@ -31,12 +31,13 @@ const RightSidebarWrapper = styled.aside`
   font-weight: 700;
   padding: 1rem;
   max-width: 200px;
+  min-width: 150px;
   height: 100vh;
     display: block;
 `;
 
 const RightSidebarTitle = styled.p`
-  margin-top: 0;
+  margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -47,14 +48,24 @@ const RightSidebarList = styled.ul`
   overflow-x: hidden;
   overflow-y: auto;
   height: 80vh;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 0;
   padding: 0;
   list-style: none;
   & ul {
+    list-style: none;
     margin: 0;
     padding: 0;
-    list-style: none;
+  }
+  & p{
+    margin: 0;
+    padding: 0;
+    font-size: 1.3rem;
+  }
+  & li {
+    margin:  2px 2px 2px 5px ;
+    padding: 0em;
+    font-size: 1.2rem;
   }
 `;
 

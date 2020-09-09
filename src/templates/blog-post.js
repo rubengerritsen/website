@@ -16,6 +16,8 @@ class PostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
 
+    console.log(post.tableOfContents)
+
 
     return (
       <Layout tableOfContents={post.tableOfContents} location={this.props.location} title={siteTitle}>

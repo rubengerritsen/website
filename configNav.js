@@ -20,7 +20,7 @@ const config = {
     frontline: false,
     ignoreIndex: true,
     title:
-      "<a href='/docs'>Docs</a>",
+      "<a href='/docs'>Contents</a>",
   },
 };
 

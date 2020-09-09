@@ -4,17 +4,6 @@ import RightSidebar from '../RightSidebar';
 import styled from '@emotion/styled';
 
 
-const Wrapper = styled('div')`
-  display: flex;
-  width: 100%
-  justify-content: flex-start;
-  background: $dark-bg;
-
-  @media only screen and (max-width: 850px) {
-    display: block;
-  }
-`;
-
 const RightSideBarWidth = styled('div')`
   position: sticky;
   position: -webkit-sticky;
@@ -66,7 +55,7 @@ const Layout = props => {
                 <Link to={`/docs`}>Docs</Link>
               </li>
               <li className="nav-tags" role="menuitem">
-                <Link to={`/projects`}>Projects</Link>
+                <Link to={`/posts`}>Posts</Link>
               </li>
               <li className="nav-tags" role="menuitem">
                 <Link to={`/search`}>Search</Link>

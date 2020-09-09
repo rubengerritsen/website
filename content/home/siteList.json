@@ -1,12 +1,17 @@
 [
   {
-    "displayName": "Quantum Mechanics & Chemistry 2",
+    "displayName": "Docs",
     "pageLink": "docs",
     "thumbnail": "./qmc.png"
   },
   {
-    "displayName": "Projects",
-    "pageLink": "projects",
+    "displayName": "Posts",
+    "pageLink": "posts",
+    "thumbnail": "./bbbb.png"
+  },
+  {
+    "displayName": "Book 2",
+    "pageLink": "/docs/book2",
     "thumbnail": "./bbbb.png"
   }
 ]
