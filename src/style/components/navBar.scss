@@ -1,0 +1,24 @@
+.sideBarNav {
+  height: 100vh;
+  padding: 0.3em;
+  list-style: none;
+  & ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0.3em;
+  }
+  & li {
+    margin:  2px 2px 2px 8px ;
+    padding: 0em;
+    font-size: 1.5rem;
+  }
+  & li li {
+    padding: 0em;
+    font-size: 1.3rem;
+  }
+  & li li a {
+    color: #555454 !important;
+    font-size: 1.2rem;
+    padding: 0em;
+  }
+}

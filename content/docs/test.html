@@ -1,0 +1,952 @@
+<div style="max-width: 900px;">
+  <hr />
+  <h1 class="title">Contents</h1>
+  <nav id="TOC">
+    <ul>
+      <li><a href="#the-assignment"><span class="toc-section-number">1</span> The Assignment</a></li>
+      <li><a href="#potentials-and-forces"><span class="toc-section-number">2</span> Potentials and Forces</a>
+        <ul>
+          <li><a href="#bond-potential"><span class="toc-section-number">2.1</span> Bond Potential</a></li>
+          <li><a href="#angular-potential"><span class="toc-section-number">2.2</span> Angular Potential</a></li>
+          <li><a href="#combining-forces"><span class="toc-section-number">2.3</span> Combining Forces</a></li>
+        </ul>
+      </li>
+      <li><a href="#quick-check-solution"><span class="toc-section-number">3</span> Quick Check (Solution)</a>
+        <ul>
+          <li><a href="#hydrogen"><span class="toc-section-number">3.1</span> Hydrogen</a></li>
+          <li><a href="#water-parameters"><span class="toc-section-number">3.2</span> Water: parameters</a></li>
+          <li><a href="#water-xyz"><span class="toc-section-number">3.3</span> Water: xyz</a></li>
+          <li><a href="#water-solution"><span class="toc-section-number">3.4</span> Water: Solution</a></li>
+        </ul>
+      </li>
+      <li><a href="#a-note-about-units"><span class="toc-section-number">4</span> A note about units</a></li>
+    </ul>
+  </nav>
+  <hr />
+  <h1 data-number="1" id="the-assignment"><span class="header-section-number">1</span> The Assignment</h1>
+  <p>This weeks assignment consists of four parts</p>
+  <ul>
+    <li>
+      <p>Calculate bond lengths,</p>
+    </li>
+    <li>
+      <p>Calculate angles and</p>
+    </li>
+    <li>
+      <p>Calculate forces resulting from the two.</p>
+    </li>
+  </ul>
+  <p>You should calculate these quantities for two molecules: hydrogen, which has only one bond, and water, which has
+    one angle and two bonds (see Figure <a href="#fig:molecules" data-reference-type="ref"
+      data-reference="fig:molecules">[fig:molecules]</a>, .xyz files can be found at the end of this document). It is
+    worth your while to write out the formulas for the angles and forces on paper before you try to implement them.
+    Moreover for the bond in hydrogen it is very easy to check your implementation by hand. For the water molecule it is
+    also possible, but it is a bit harder so we provide you with the solution at the end of this document so you can
+    check your implementation.</p>
+  <h1 data-number="2" id="potentials-and-forces"><span class="header-section-number">2</span> Potentials and Forces</h1>
+  <p>In week 1 you have seen that the state of a molecular system is determined by the positions of the atoms and their
+    velocity. The time evolution of a single atom <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>i</mi>
+        <annotation encoding="application/x-tex">i</annotation>
+      </semantics>
+    </math> is given by Newton’s equation <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>i</mi>
+            </msub>
+            <mo>=</mo>
+            <msub>
+              <mi>m</mi>
+              <mi>i</mi>
+            </msub>
+            <mo>⋅</mo>
+            <msub>
+              <mover>
+                <mstyle mathvariant="bold">
+                  <mi>𝐪</mi>
+                </mstyle>
+                <mo accent="true">̈</mo>
+              </mover>
+              <mi>i</mi>
+            </msub>
+            <mo>,</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_i=m_i\cdot \ddot{\mathbf{q}}_i,</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(1)</span></span> where <math
+      display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mstyle mathvariant="bold">
+            <mi>𝐅</mi>
+          </mstyle>
+          <mi>i</mi>
+        </msub>
+        <annotation encoding="application/x-tex">\mathbf{F}_i</annotation>
+      </semantics>
+    </math> is the force acting on atom <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>i</mi>
+        <annotation encoding="application/x-tex">i</annotation>
+      </semantics>
+    </math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>m</mi>
+          <mi>i</mi>
+        </msub>
+        <annotation encoding="application/x-tex">m_i</annotation>
+      </semantics>
+    </math> the mass of the atom. To use this equation we need the force. Since all forces are conservative in MD (and
+    actually in all of life) we can write them as the gradient (derivative) of some scalar potential, <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>i</mi>
+            </msub>
+            <mo>=</mo>
+            <mo>−</mo>
+            <msub>
+              <mi>∇</mi>
+              <msub>
+                <mstyle mathvariant="bold">
+                  <mi>𝐪</mi>
+                </mstyle>
+                <mi>i</mi>
+              </msub>
+            </msub>
+            <mi>V</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐪</mi>
+              </mstyle>
+              <mn>1</mn>
+            </msub>
+            <mo>,</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐪</mi>
+              </mstyle>
+              <mn>2</mn>
+            </msub>
+            <mo>,</mo>
+            <mi>…</mi>
+            <mo>,</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐪</mi>
+              </mstyle>
+              <mi>N</mi>
+            </msub>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mi>.</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_i = - \nabla_{\mathbf{q}_i} V(\mathbf{q}_1, \mathbf{q}_2,
+            \ldots, \mathbf{q}_N).</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(2)</span></span> Note that the
+    derivative is with respect to the atom (particle) of interest <math display="inline"
+      xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>i</mi>
+        <annotation encoding="application/x-tex">i</annotation>
+      </semantics>
+    </math>, while the potential itself is for the whole system and depends on all particle positions. To simplify this
+    a bit, the potential is generally taken to be the sum of many smaller potentials that describe specific parts of the
+    system (e.g. a bond). The collection of all potentials used in a simulation is called the <em>force-field</em>.</p>
+  <p>In this week and weeks five and six we will build up a force field for our simulation. We can divide the forces and
+    potentials in two categories, the so called <em>intra</em>-molecular (within a molecule) potentials and the
+    <em>inter</em>-molecular (between molecules) potentials. This week we start with two intra-molecular potentials,
+    describing the bonds and angles within a molecule.</p>
+  <h2 data-number="2.1" id="bond-potential"><span class="header-section-number">2.1</span> Bond Potential</h2>
+  <figure>
+    <img src="bonds-1.png" id="bonds" style="width:6cm" alt="" />
+    <figcaption>Attractive force for a bond between two atoms.</figcaption>
+  </figure>
+  <p>In a chemical bond two electrons are shared between two atoms. This sharing results in a force that is attractive
+    most of the time (see Figure <a href="#bonds" data-reference-type="ref" data-reference="bonds">1</a>), but repulsive
+    if the atoms get close together. This implies there should be some equilibrium position of the bond length where the
+    force is zero, neither attractive nor repulsive. In physical terms, the potential energy has a minimum.</p>
+  <p>Every minimum (or maximum) of a potential can be approximated by a quadratic term (think of a taylor expansion
+    where the zeroth and first derivative are zero, why can we take the zeroth derivative as zero?). This is exactly
+    what is typically done in MD. This approximation results in the <em>harmonic bond potential</em> <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mi>V</mi>
+              <mtext mathvariant="normal">bond</mtext>
+            </msub>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>r</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <mfrac>
+              <mn>1</mn>
+              <mn>2</mn>
+            </mfrac>
+            <mi>k</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>r</mi>
+            <mo>−</mo>
+            <msub>
+              <mi>r</mi>
+              <mn>0</mn>
+            </msub>
+            <msup>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <annotation encoding="application/x-tex">V_{\text{bond}}(r) =\frac{1}{2} k(r-r_0)^2</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(3)</span></span> where <math
+      display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>k</mi>
+        <annotation encoding="application/x-tex">k</annotation>
+      </semantics>
+    </math> is the bond strength and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>r</mi>
+          <mn>0</mn>
+        </msub>
+        <annotation encoding="application/x-tex">r_0</annotation>
+      </semantics>
+    </math> the equilibrium length of the bond with current length <math display="inline"
+      xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>r</mi>
+        <annotation encoding="application/x-tex">r</annotation>
+      </semantics>
+    </math>. To get the total bond energy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>E</mi>
+          <mtext mathvariant="normal">bond</mtext>
+        </msub>
+        <annotation encoding="application/x-tex">E_{\text{bond}}</annotation>
+      </semantics>
+    </math> you simply sum over all bonds <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mi>E</mi>
+              <mtext mathvariant="normal">bond</mtext>
+            </msub>
+            <mo>=</mo>
+            <munder>
+              <mo>∑</mo>
+              <mtext mathvariant="normal">all bonded i,j</mtext>
+            </munder>
+            <msub>
+              <mi>V</mi>
+              <mtext mathvariant="normal">bond</mtext>
+            </msub>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mo stretchy="false" form="prefix">|</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐫</mi>
+              </mstyle>
+              <mi>i</mi>
+            </msub>
+            <mo>−</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐫</mi>
+              </mstyle>
+              <mi>j</mi>
+            </msub>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mi>.</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">E_{\text{bond}} = \sum_\text{all~bonded~i,j}
+            V_{\text{bond}}(|\mathbf{r}_i - \mathbf{r}_j|).</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(4)</span></span> To arrive at a
+    force we need to take the derivative with respect to the atom we want the force on. This is in most cases quite
+    complicated, an easier approach is to find the magnitude of the force in its original variables (in this case bond
+    length), <span id=" " style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mi>F</mi>
+              <mtext mathvariant="normal">bond</mtext>
+            </msub>
+            <mo>=</mo>
+            <mo>−</mo>
+            <mfrac>
+              <mrow>
+                <mi>d</mi>
+                <msub>
+                  <mi>V</mi>
+                  <mtext mathvariant="normal">bond</mtext>
+                </msub>
+              </mrow>
+              <mrow>
+                <mi>d</mi>
+                <mi>r</mi>
+              </mrow>
+            </mfrac>
+            <mo>,</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">F_{\text{bond}} = -\frac{dV_{\text{bond}}}{dr},</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(5)</span></span> and then convert
+    it to the correct 3D vector by multiplying it with the (unit) vector that points in the correct direction. As an
+    example the force on atom <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>a</mi>
+        <annotation encoding="application/x-tex">a</annotation>
+      </semantics>
+    </math> in Figure <a href="#bonds" data-reference-type="ref" data-reference="bonds">1</a> is <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>a</mi>
+            </msub>
+            <mo>=</mo>
+            <msub>
+              <mi>F</mi>
+              <mtext mathvariant="normal">bond</mtext>
+            </msub>
+            <mo>⋅</mo>
+            <mfrac>
+              <msub>
+                <mstyle mathvariant="bold">
+                  <mi>𝐫</mi>
+                </mstyle>
+                <mrow>
+                  <mi>a</mi>
+                  <mi>b</mi>
+                </mrow>
+              </msub>
+              <mrow>
+                <mo stretchy="false" form="postfix">‖</mo>
+                <msub>
+                  <mstyle mathvariant="bold">
+                    <mi>𝐫</mi>
+                  </mstyle>
+                  <mrow>
+                    <mi>a</mi>
+                    <mi>b</mi>
+                  </mrow>
+                </msub>
+                <mo stretchy="false" form="postfix">‖</mo>
+              </mrow>
+            </mfrac>
+            <mi>.</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_a = F_{\text{bond}} \cdot \frac{\mathbf{r}_{ab}}{\Vert
+            \mathbf{r}_{ab}\Vert}.</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(6)</span></span> From Newton’s
+    third law (action is minus reaction) we immediately have the force on particle <math display="inline"
+      xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>b</mi>
+        <annotation encoding="application/x-tex">b</annotation>
+      </semantics>
+    </math>, <span id=" " style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>b</mi>
+            </msub>
+            <mo>=</mo>
+            <mo>−</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>a</mi>
+            </msub>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_b = - \mathbf{F}_a</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(7)</span></span></p>
+  <h2 data-number="2.2" id="angular-potential"><span class="header-section-number">2.2</span> Angular Potential</h2>
+  <figure>
+    <img src="angle-1.png" id="angle" style="width:6cm" alt="" />
+    <figcaption>Forces due to the angular potential.</figcaption>
+  </figure>
+  <p>The angular potential we use is also harmonic, <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mi>V</mi>
+              <mtext mathvariant="normal">angle</mtext>
+            </msub>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>θ</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <mfrac>
+              <mn>1</mn>
+              <mn>2</mn>
+            </mfrac>
+            <msub>
+              <mi>k</mi>
+              <mi>θ</mi>
+            </msub>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>θ</mi>
+            <mo>−</mo>
+            <msub>
+              <mi>θ</mi>
+              <mn>0</mn>
+            </msub>
+            <msup>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mn>2</mn>
+            </msup>
+            <mo>,</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">V_{\text{angle}}(\theta) =\frac{1}{2} k_{\theta}(\theta-\theta_0)^2,
+          </annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(8)</span></span> where <math
+      display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>k</mi>
+          <mi>θ</mi>
+        </msub>
+        <annotation encoding="application/x-tex">k_\theta</annotation>
+      </semantics>
+    </math> is the strength of the angle and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>θ</mi>
+          <mn>0</mn>
+        </msub>
+        <annotation encoding="application/x-tex">\theta_0</annotation>
+      </semantics>
+    </math> the equilibrium position. How this potential acts on a molecule is depicted in Figure <a href="#angle"
+      data-reference-type="ref" data-reference="angle">2</a>. How this potential should be converted to a force is left
+    to you as part of this assignment (work this out on paper first). What follows are tips you can use to make it a bit
+    easier.</p>
+  <h3 data-number="2.2.1" id="forces-from-potentials"><span class="header-section-number">2.2.1</span> Forces from
+    potentials</h3>
+  <p>You can take two approaches when computing a force from a potential</p>
+  <ol>
+    <li>
+      <p>Compute the derivatives of the potential in the <math display="inline"
+          xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>x</mi>
+            <annotation encoding="application/x-tex">x</annotation>
+          </semantics>
+        </math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>y</mi>
+            <annotation encoding="application/x-tex">y</annotation>
+          </semantics>
+        </math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>z</mi>
+            <annotation encoding="application/x-tex">z</annotation>
+          </semantics>
+        </math> directions for the correct atom position. This involves a lot of calculus since potentials are usually
+        not defined in terms of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mi>x</mi>
+              <mi>y</mi>
+              <mi>z</mi>
+            </mrow>
+            <annotation encoding="application/x-tex">xyz</annotation>
+          </semantics>
+        </math>, but in what is convenient for that potential.</p>
+    </li>
+    <li>
+      <p>Figure out the magnitude of the forces first and then multiply them with a unit vector that gives the force the
+        right direction (this is what I did in the bonds example above). Now the problem is divided into two problems,
+        but both problems are easy and very straightforward to implement in a programming language. Don’t get too
+        excited though; for the angular potential you still need to do a bit of calculus to go from the angle to
+        positions. (You can’t simply take the derivative with respect to <math display="inline"
+          xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>θ</mi>
+            <annotation encoding="application/x-tex">\theta</annotation>
+          </semantics>
+        </math> and multiply it with a direction vector.)</p>
+    </li>
+  </ol>
+  <h3 data-number="2.2.2" id="geometric-tricks-with-vectors"><span class="header-section-number">2.2.2</span> Geometric
+    tricks with vectors</h3>
+  <p>In Figure <a href="#angle" data-reference-type="ref" data-reference="angle">2</a> you see a schematic drawing of a
+    triatomic molecule. It is drawn in the plain of the paper, but in reality it can be rotated in any direction. This
+    makes finding out the direction of forces with respect to the <math display="inline"
+      xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mi>y</mi>
+          <mi>z</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">xyz</annotation>
+      </semantics>
+    </math> axes challenging. But we can use some basic vector tricks.</p>
+  <ul>
+    <li>
+      <p>To get a normal vector to the plain of the molecule you can use the cross product <math display="inline"
+          xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mstyle mathvariant="bold">
+                <mi>𝐧</mi>
+              </mstyle>
+              <mo>=</mo>
+              <msub>
+                <mi>r</mi>
+                <mrow>
+                  <mi>a</mi>
+                  <mi>b</mi>
+                </mrow>
+              </msub>
+              <mo>×</mo>
+              <msub>
+                <mi>r</mi>
+                <mrow>
+                  <mi>b</mi>
+                  <mi>c</mi>
+                </mrow>
+              </msub>
+            </mrow>
+            <annotation encoding="application/x-tex">\mathbf{n} = r_{ab} \times r_{bc}</annotation>
+          </semantics>
+        </math> (or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mstyle mathvariant="bold">
+                <mi>𝐧</mi>
+              </mstyle>
+              <mo>=</mo>
+              <msub>
+                <mi>r</mi>
+                <mrow>
+                  <mi>b</mi>
+                  <mi>a</mi>
+                </mrow>
+              </msub>
+              <mo>×</mo>
+              <msub>
+                <mi>r</mi>
+                <mrow>
+                  <mi>b</mi>
+                  <mi>c</mi>
+                </mrow>
+              </msub>
+              <mi>?</mi>
+            </mrow>
+            <annotation encoding="application/x-tex">\mathbf{n} = r_{ba} \times r_{bc}?</annotation>
+          </semantics>
+        </math>).</p>
+    </li>
+    <li>
+      <p>To get a vector pointing in the direction of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <msub>
+              <mi>F</mi>
+              <mi>a</mi>
+            </msub>
+            <annotation encoding="application/x-tex">F_a</annotation>
+          </semantics>
+        </math>, for example, you can use another cross product.</p>
+    </li>
+    <li>
+      <p>To get <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>θ</mi>
+            <annotation encoding="application/x-tex">\theta</annotation>
+          </semantics>
+        </math> you can use a dot product. But beware! Which numerical problems can occur? Is there a more stable
+        approach?</p>
+    </li>
+  </ul>
+  <h3 data-number="2.2.3" id="generalizing-newtons-third-law"><span class="header-section-number">2.2.3</span>
+    Generalizing Newton’s third law</h3>
+  <p>We can generalize Newton’s third law. We have seen the most basic case in the bond example, <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>a</mi>
+            </msub>
+            <mo>+</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>b</mi>
+            </msub>
+            <mo>=</mo>
+            <mn>0</mn>
+            <mi>.</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_a + \mathbf{F}_b = 0.</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(9)</span></span> It simply states
+    that the forces within a closed system should sum to zero (Newton: for every action, there is an equal and opposite
+    reaction). Generalizing this we have <span id=" "
+      style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <munder>
+              <mo>∑</mo>
+              <mi>i</mi>
+            </munder>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>i</mi>
+            </msub>
+            <mo>=</mo>
+            <mn>0</mn>
+            <mi>.</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">\sum_{i} \mathbf{F}_i = 0.</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(10)</span></span></p>
+  <h2 data-number="2.3" id="combining-forces"><span class="header-section-number">2.3</span> Combining Forces</h2>
+  <p>Forces are additive, to compute the total force acting on an atom we can simply sum all the forces acting on that
+    atom. <span id=" " style="display: inline-block; position: relative; width: 100%;"><math display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mi>i</mi>
+            </msub>
+            <mo>=</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mrow>
+                <mtext mathvariant="normal">bond</mtext>
+                <mo>,</mo>
+                <mi>i</mi>
+              </mrow>
+            </msub>
+            <mo>+</mo>
+            <msub>
+              <mstyle mathvariant="bold">
+                <mi>𝐅</mi>
+              </mstyle>
+              <mrow>
+                <mtext mathvariant="normal">angle</mtext>
+                <mo>,</mo>
+                <mi>i</mi>
+              </mrow>
+            </msub>
+          </mrow>
+          <annotation encoding="application/x-tex">\mathbf{F}_i = \mathbf{F}_{\text{bond},i} +
+            \mathbf{F}_{\text{angle},i}</annotation>
+        </semantics>
+      </math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(11)</span></span> Note that in
+    large molecules <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mstyle mathvariant="bold">
+            <mi>𝐅</mi>
+          </mstyle>
+          <mrow>
+            <mtext mathvariant="normal">bond</mtext>
+            <mo>,</mo>
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <annotation encoding="application/x-tex">\mathbf{F}_{\text{bond},i}</annotation>
+      </semantics>
+    </math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mstyle mathvariant="bold">
+            <mi>𝐅</mi>
+          </mstyle>
+          <mrow>
+            <mtext mathvariant="normal">angle</mtext>
+            <mo>,</mo>
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <annotation encoding="application/x-tex">\mathbf{F}_{\text{angle},i}</annotation>
+      </semantics>
+    </math> might be sums of forces themselves, since there could be more than one bond to an atom and an atom can be
+    part of more than one angle.</p>
+  <h1 data-number="3" id="quick-check-solution"><span class="header-section-number">3</span> Quick Check (Solution)</h1>
+  <h2 data-number="3.1" id="hydrogen"><span class="header-section-number">3.1</span> Hydrogen</h2>
+  <p>The hydrogen molecule can be checked by hand. Use the following parameters if you want to do explicit calculations
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>k</mi>
+          <mo>=</mo>
+          <mn>24531</mn>
+          <msup>
+            <mtext mathvariant="normal">kJ mol</mtext>
+            <mrow>
+              <mo>−</mo>
+              <mn>1</mn>
+            </mrow>
+          </msup>
+          <msup>
+            <mtext mathvariant="normal">nm</mtext>
+            <mrow>
+              <mo>−</mo>
+              <mn>2</mn>
+            </mrow>
+          </msup>
+        </mrow>
+        <annotation encoding="application/x-tex">k=24531\text{kJ~mol}^{-1}\text{nm}^{-2}</annotation>
+      </semantics>
+    </math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mi>r</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>=</mo>
+          <mn>0.74</mn>
+          <mtext mathvariant="normal">Å</mtext>
+        </mrow>
+        <annotation encoding="application/x-tex">r_0=0.74 \text{\AA}</annotation>
+      </semantics>
+    </math>, check your units!</p>
+  <p>The xyz file</p>
+  <div>
+    <pre style="line-height: 125%; margin: 0;"><span></span>2
+  Hydrogen
+  H 0.0 0.0 -0.367
+  H 0.0 0.0  0.367
+  </pre>
+  </div>
+
+  <h2 data-number="3.2" id="water-parameters"><span class="header-section-number">3.2</span> Water: parameters</h2>
+  <div id="tab:h2o_bonds">
+    <table>
+      <caption>H<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <msub>
+              <mi></mi>
+              <mn>2</mn>
+            </msub>
+            <annotation encoding="application/x-tex">_2</annotation>
+          </semantics>
+        </math>O bonds. </caption>
+      <thead>
+        <tr class="header">
+          <th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>r</mi>
+                  <mi>o</mi>
+                </msub>
+                <annotation encoding="application/x-tex">r_o</annotation>
+              </semantics>
+            </math> (nm)</th>
+          <th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>k</mi>
+                  <mi>b</mi>
+                </msub>
+                <annotation encoding="application/x-tex">k_b</annotation>
+              </semantics>
+            </math> (kJ mol<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi></mi>
+                  <mrow>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </msup>
+                <annotation encoding="application/x-tex">^{-1}</annotation>
+              </semantics>
+            </math> nm<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi></mi>
+                  <mrow>
+                    <mo>−</mo>
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+                <annotation encoding="application/x-tex">^{-2}</annotation>
+              </semantics>
+            </math>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td style="text-align: center;">0.09572</td>
+          <td style="text-align: center;">502416</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tab:h2o_angles">
+    <table>
+      <caption>H<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <msub>
+              <mi></mi>
+              <mn>2</mn>
+            </msub>
+            <annotation encoding="application/x-tex">_2</annotation>
+          </semantics>
+        </math>O Angles.</caption>
+      <thead>
+        <tr class="header">
+          <th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>θ</mi>
+                  <mi>o</mi>
+                </msub>
+                <annotation encoding="application/x-tex">\theta_o</annotation>
+              </semantics>
+            </math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi></mi>
+                  <mi>o</mi>
+                </msup>
+                <annotation encoding="application/x-tex">^o</annotation>
+              </semantics>
+            </math>)</th>
+          <th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>k</mi>
+                  <mi>θ</mi>
+                </msub>
+                <annotation encoding="application/x-tex">k_\theta</annotation>
+              </semantics>
+            </math> (kJ mol<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi></mi>
+                  <mrow>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </msup>
+                <annotation encoding="application/x-tex">^{-1}</annotation>
+              </semantics>
+            </math> rad<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi></mi>
+                  <mrow>
+                    <mo>−</mo>
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+                <annotation encoding="application/x-tex">^{-2}</annotation>
+              </semantics>
+            </math>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td style="text-align: center;">104.52</td>
+          <td style="text-align: center;">628.02</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 data-number="3.3" id="water-xyz"><span class="header-section-number">3.3</span> Water: xyz</h2>
+  <div>
+    <pre style="line-height: 125%; margin: 0;"><span></span>3
+  Water
+  O         1.93617934      2.31884508      1.72261570
+  H         1.78931374      3.24075634      1.51114298
+  H         2.30448689      1.98045541      0.90160232
+  </pre>
+  </div>
+
+  <h2 data-number="3.4" id="water-solution"><span class="header-section-number">3.4</span> Water: Solution</h2>
+  <p>When I did the calculations I got what follows, if you got something else, but you are absolutely sure it is right,
+    let us know, maybe there is a mistake here. (Probably not though)</p>
+  <p>Every row is the total force vector for the corresponding atom in the xyz file. The first line is the Oxygen atom
+    the second the first hydrogen etc.</p>
+  <div>
+    <pre style="line-height: 125%; margin: 0;"><span></span>[[ 16.    13.66 -55.08]
+   [-10.08   4.37  25.81]
+   [ -5.92 -18.04  29.28]]
+  </pre>
+  </div>
+
+  <p>Once again check the units, I used a particularly strange system of units where the unit energy is kJ/mol, the
+    length is , the mass is amu, and the time is 0.1 ps. Which implies that the forces above are given in units of <math
+      display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mfrac>
+          <mrow>
+            <mtext mathvariant="normal">amu</mtext>
+            <mo>⋅</mo>
+            <mtext mathvariant="normal">Å</mtext>
+          </mrow>
+          <mrow>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mn>0.1</mn>
+            <mtext mathvariant="normal">ps</mtext>
+            <msup>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+        </mfrac>
+        <annotation encoding="application/x-tex">\frac{\text{amu} \cdot \text{\AA}}{(0.1\text{ps})^2}</annotation>
+      </semantics>
+    </math>.</p>
+  <h1 data-number="4" id="a-note-about-units"><span class="header-section-number">4</span> A note about units</h1>
+  <p>You might be wondering why I used such strange units in the solution above. The short answer: computers are bad
+    with very small numbers (you get rounding errors). If you pick a system of units such that your problem has mainly
+    variables with a magnitude around 1 (or larger), you can workaround that issue. More about this next week.</p>
+  <hr />
+</div>

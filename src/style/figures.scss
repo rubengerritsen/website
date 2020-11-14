@@ -1,0 +1,21 @@
+hr-fig {
+  position: relative;
+  display: block;
+  align-content: center;
+  text-align:center;
+  width: 60%;
+  margin: auto;
+  margin-top: -0.2em;
+  padding: 0;
+  height: 0.01rem;
+  border: 0;
+  border-top: solid 0.01rem $light-border;
+}
+
+.md-image {
+padding: 5px 5px 5px 5px;
+font-size: 0.8em;
+align-content: center;
+text-align: center;
+display: block;
+}

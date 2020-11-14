@@ -1,0 +1,79 @@
+/* ---------------------------------------------------------- */
+/* Blog and Home Layout
+/* ---------------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  background: $light-bg;
+  @media only screen and (max-width: 850px) {
+    display: block;
+  }
+
+}
+
+.wrapper2 {
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: left;
+  align-content: left;
+  background: $light-bg;
+  @media only screen and (max-width: 850px) {
+    display: block;
+  }
+
+}
+
+.site-main {
+  display: relative;
+  align-content: center;
+  justify-content: center;
+  flex-grow: 0;
+  margin: 0px 8px;
+  padding-top: 3rem;
+  background: $light-bg;
+  padding-left: 0;
+  border-style: none   none none solid;
+  border-width: 1px;
+  border-color: rgba(172, 172, 172, 0.323);
+
+  table tr {
+    background: $light-bg;
+  }
+}
+
+.site-main-maxWidth{
+  min-width: 50vw;
+  max-width: 80vw;
+  @media only screen and (max-width: 850px) {
+    max-width: 95vw;
+    width: 100%;
+    position: relative;
+  }
+}
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw 0;
+  max-width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.page-head-title {
+  margin: 0;
+  text-align: center;
+  font-size: 4.2rem;
+  color: $light-body-font;
+}
+@media (max-width: 500px) {
+  .page-head-title {
+    font-size: 2rem;
+  }
+}

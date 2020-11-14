@@ -1,0 +1,56 @@
+/* Variables
+/* ---------------------------------------------------------- */
+
+/* Fonts */
+$font-sans-serif: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-serif: 'New York', serif;
+$font-mono: monospace;
+$font-light: 100;
+$font-normal: 400;
+$font-bold: 700;
+$font-heavy: 800;
+
+/* Breakpoints */
+$xlarge: 1680px;
+$large: 1280px;
+$medium: 980px;
+$small: 740px;
+$xsmall: 480px;
+
+/* Sizes */
+$height: 4rem;
+$margin: 2rem;
+$radius: 0.5rem;
+$topBarHeight: 40px;
+
+/**********************/
+/* Colours Light Mode */
+/**********************/
+$light-body-font: #131313;
+$light-body-accent: #1665af;
+$light-heading: #42484d;
+$light-inverted: #131313;
+$light-primary:#00529E; //used for blockquote in md
+$light-base: #ffffff;
+$light-sub-base: #454545;
+$light-border: #ababab;
+$light-gray: #555454;
+$light-bg: #ffffff; // #f8f8f8 also nice
+$light-bg-bright: #dbd8d8;
+$light-bg-topbar: #dbd8d8;
+$light-link: #0f5ba3;
+$light-title-accent: #0f5ba3;
+$light-border: rgba(172, 172, 172, 0.623);
+// pl -> post-link
+$light-pl-bg: #fff; 
+$light-pl-bdr: #eee;
+$light-pl-shadow: #d5d5d5;
+$light-pl-hover: #b1b1b1;
+// sb -> sidebar
+$light-sb-title: #e0f0f3;
+
+/***************************/
+/* Shared Colors
+/**************************/
+$code-bg: rgb(240, 240, 240);
+$code-font: rgba(0, 0, 0, 0.884);
