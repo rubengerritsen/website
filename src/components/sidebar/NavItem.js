@@ -14,10 +14,10 @@ const NavItem = ({ item, liStyle }) => {
   const isCollapsed = state.collapsed[item.url];
   const hasChildren = item.items && item.items.length > 0;
   return (
-    <li  className={liStyle}>
+    <li className={liStyle}>
       <Link onClick={() => {
-            dispatch({ type: 'SET_NAV_OPEN', url: item.url });
-          }} to={item.url} activeClassName="is-active">
+        dispatch({ type: 'SET_NAV_OPEN', url: item.url });
+      }} to={item.url} activeClassName="is-active">
         {item.title}
       </Link>
 
@@ -33,12 +33,12 @@ const NavItem = ({ item, liStyle }) => {
         <ul>
           {item.items.map(child => (
             <div>
-              <NavItem key={child.url} item={child} className="sideBarLIPage"/>
+              <NavItem key={child.url} item={child} className="sideBarLIPage" />
             </div>
           ))}
         </ul>
       )}
-      
+
     </li>
   );
 };

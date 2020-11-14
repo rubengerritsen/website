@@ -8,12 +8,12 @@ import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalCont
 const calculateTreeData = (edges, sidebarConfig) => {
   const originalData = sidebarConfig.ignoreIndex
     ? edges.filter(
-        ({
-          node: {
-            fields: { slug }
-          }
-        }) => slug !== '/'
-      )
+      ({
+        node: {
+          fields: { slug }
+        }
+      }) => slug !== '/'
+    )
     : edges;
 
   if (originalData.length === 0) {
@@ -25,12 +25,12 @@ const calculateTreeData = (edges, sidebarConfig) => {
       accu,
       {
         node: {
-          fields: { slug},
-          frontmatter: {title}
+          fields: { slug },
+          frontmatter: { title }
         }
       }
     ) => {
-      const parts = slug.slice(1,-1).split('/');
+      const parts = slug.slice(1, -1).split('/');
       let { items: prevItems } = accu;
       for (const part of parts.slice(1, -1)) {
         let tmp = prevItems.find(({ label }) => label === part);
@@ -64,7 +64,7 @@ const calculateTreeData = (edges, sidebarConfig) => {
   const tmp = [...forcedNavOrder];
   tmp.reverse();
   return tmp.reduce((accu, slug) => {
-    const parts = slug.slice(1,-1).split('/');
+    const parts = slug.slice(1, -1).split('/');
     let { items: prevItems } = accu;
     for (const part of parts.slice(1, -2)) {
       let tmp = prevItems.find(({ label }) => label === part);
@@ -80,7 +80,7 @@ const calculateTreeData = (edges, sidebarConfig) => {
     }
     // sort items alphabetically.
     prevItems.forEach(item => {
-      item.items = item.items.sort(function(a, b) {
+      item.items = item.items.sort(function (a, b) {
         if (a.label < b.label) return -1;
         if (a.label > b.label) return 1;
         return 0;
@@ -134,16 +134,19 @@ const Navigation = () => {
   const dispatch = useContext(GlobalDispatchContext);
 
   treeData.items.forEach(item => {
-    if (item.url && !state.collapsed.hasOwnProperty(item.url)){
-        dispatch({ type: 'SET_NAV_COLLAPSED', url: item.url });
+    if (item.url && !state.collapsed.hasOwnProperty(item.url)) {
+      dispatch({ type: 'SET_NAV_COLLAPSED', url: item.url });
     }
   });
+
+  console.log("HEYHO!!!")
+  console.log(treeData)
 
   return (
     <ul className={'sideBarULBook'}>
       {treeData.items.map(item => (
         <NavItem key={item.url} item={item} liStyle="sideBarLIBook" />
-      )) }
+      ))}
     </ul>
   );
 };
