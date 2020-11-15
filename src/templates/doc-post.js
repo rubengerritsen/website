@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react"
+import React, { Component } from "react"
 import { graphql } from "gatsby"
 import NextPrevious from '../components/NextPrevious';
 import { Link } from 'gatsby';

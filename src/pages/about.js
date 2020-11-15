@@ -1,8 +1,6 @@
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
-import HeaderLayout from "../components/layouts/header_layout"
-import MathJax from 'react-mathjax';
-import RemarkMathPlugin from 'remark-math';
+import HeaderLayout from "../components/layouts/header_layout";
 
 // Import theme 
 import "../style/all.scss"

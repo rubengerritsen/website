@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import Navigation from './Navigation';
-import { Link } from 'gatsby';
 
 
 const LeftSidebar = props => {
@@ -34,19 +33,5 @@ const LeftSidebarWrapper = styled.aside`
   height: 95vh;
 `;
 
-
-
-const LeftSidebarTitle = styled.p`
-& a {
-  color: #000;
-}
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  font-size: 1.8rem;
-  font-weight: 600;
-  width:inherit;
-    max-width:inherit;
-  
-`;
 
 export default LeftSidebar;
