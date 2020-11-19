@@ -1,15 +1,11 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
+const siteParams = require("./siteParams")
 
 module.exports = {
   siteMetadata: {
-    title: 'rubengerritsen.nl',
-    description: "Rubens personal website",
-    author: "Ruben Gerritsen",
-    siteUrl: 'https://www.rubengerritsen.nl',
+    title: siteParams.title,
+    description: siteParams.description,
+    author: siteParams.author,
+    siteUrl: siteParams.url,
   },
   plugins: [
     {
@@ -22,11 +18,11 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-react-helmet`,
-    'gatsby-plugin-sass',
+    "gatsby-plugin-sass",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'rubengerritsen.nl',
+        name: "rubengerritsen.nl",
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
@@ -60,7 +56,7 @@ module.exports = {
               exclude: "Table of Contents",
               tight: true,
               fromHeading: 1,
-              toHeading: 3
+              toHeading: 3,
             },
           },
           `gatsby-remark-prismjs`,

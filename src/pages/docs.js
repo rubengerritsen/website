@@ -1,15 +1,15 @@
-
 import { graphql, StaticQuery } from "gatsby"
-import React, { useState } from 'react';
+import React, { useState } from "react"
 import DocsLayout from "../components/layouts/docs_layout.js"
-// Import theme 
+import SEO from "../components/SEO"
+// Import theme
 import "../style/all.scss"
 
-const calculateTreeData = (edges) => {
-  const originalData = edges;
+const calculateTreeData = edges => {
+  const originalData = edges
 
   if (originalData.length === 0) {
-    return { items: [] };
+    return { items: [] }
   }
 
   const tree = originalData.reduce(
@@ -18,53 +18,54 @@ const calculateTreeData = (edges) => {
       {
         node: {
           fields: { slug },
-          frontmatter: { title }
-        }
+          frontmatter: { title },
+        },
       }
     ) => {
-      const parts = slug.slice(1, -1).split('/');
-      let { items: prevItems } = accu;
+      const parts = slug.slice(1, -1).split("/")
+      let { items: prevItems } = accu
       for (const part of parts.slice(1, -1)) {
-        let tmp = prevItems.find(({ label }) => label === part);
+        let tmp = prevItems.find(({ label }) => label === part)
         if (tmp) {
           if (!tmp.items) {
-            tmp.items = [];
+            tmp.items = []
           }
         } else {
-          tmp = { label: part, items: [] };
-          prevItems.push(tmp);
+          tmp = { label: part, items: [] }
+          prevItems.push(tmp)
         }
-        prevItems = tmp.items;
+        prevItems = tmp.items
       }
-      const existingItem = prevItems.find(({ label }) => label === parts[parts.length - 1]);
+      const existingItem = prevItems.find(
+        ({ label }) => label === parts[parts.length - 1]
+      )
       if (existingItem) {
-        existingItem.url = slug;
-        existingItem.title = title;
+        existingItem.url = slug
+        existingItem.title = title
       } else {
         prevItems.push({
           label: parts[parts.length - 1],
           url: slug,
           items: [],
-          title
-        });
+          title,
+        })
       }
-      return accu;
+      return accu
     },
     { items: [] }
-  );
-  return tree;
-
-};
-
+  )
+  return tree
+}
 
 const AboutPage = ({ data }, location) => {
   const [treeData] = useState(() => {
-    return calculateTreeData(data.allMarkdownRemark.edges);
-  });
+    return calculateTreeData(data.allMarkdownRemark.edges)
+  })
 
   return (
     <DocsLayout>
-      <article className={`post-content no-image`} >
+      <SEO title="Docs" keywords={["table of contents"]} />
+      <article className={`post-content no-image`}>
         <h1 className="post-title-docs">Table Of Contents</h1>
         <hr-title />
         <div className="post-content-body tableOfContents">
@@ -84,8 +85,7 @@ const AboutPage = ({ data }, location) => {
           </ul>
         </div>
       </article>
-
-    </DocsLayout >
+    </DocsLayout>
   )
 }
 
@@ -96,7 +96,10 @@ const indexQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(docs)/"  }}, sort: { fields: [fields___slug], order: ASC }) {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/(docs)/" } }
+      sort: { fields: [fields___slug], order: ASC }
+    ) {
       edges {
         node {
           fields {
