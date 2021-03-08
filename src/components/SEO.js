@@ -58,6 +58,10 @@ function SEO({ description, lang, meta, keywords, title, slug, image }) {
           property: `og:url`,
           content: metaURL,
         },
+        {
+          name: `og:image`,
+          content: `/static/siteLogo.png`,
+        },
       ]
         .concat(
           keywords.length > 0

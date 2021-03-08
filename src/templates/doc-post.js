@@ -50,15 +50,6 @@ export default class MDRuntime extends Component {
 
     var metaTags = []
 
-    if (post.frontmatter.thumbnail) {
-      metaTags = [
-        {
-          name: `og:image`,
-          content: post.frontmatter.thumbnail.childImageSharp.fluid.src,
-        },
-      ]
-    }
-
     return (
       <DocsLayout
         tableOfContents={post.tableOfContents}
@@ -115,7 +106,7 @@ export const pageQuery = graphql`
         description
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 500) {
+            fluid(maxWidth: 50) {
               ...GatsbyImageSharpFluid
             }
           }
