@@ -49,7 +49,12 @@ module.exports = {
             },
           },
           `gatsby-remark-smartypants`,
-          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: 100,
+            },
+          },
           {
             resolve: `gatsby-remark-table-of-contents`,
             options: {

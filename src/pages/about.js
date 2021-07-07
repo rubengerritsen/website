@@ -18,8 +18,9 @@ const AboutPage = ({ data }, location) => {
         <div className="centerText">
           {" "}
           Hi, I am a Ruben Gerritsen, a PhD student at the Eindhoven University
-          of Technology. I work in the field of computational chemistry. To
-          contact me send an email to r.h.j.gerritsen@tue.nl
+          of Technology and this is my personal website. 
+          I work in the field of computational chemistry. 
+          To contact me send an email to r.h.j.gerritsen@tue.nl
         </div>
       </article>
     </HeaderLayout>
